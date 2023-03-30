@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id = "@+id/Inicio"
+        android:icon="@drawable/ic_baseline_home"
+        android:title="Inicio">
+    </item>
+
+    <item
+        android:id ="@+id/Citas"
+        android:icon ="@drawable/ic_baseline_location_city_24"
+        android:title="Citas">
+    </item>
+
+    <item
+        android:id="@+id/Medicación"
+        android:icon="@drawable/ic_launcher_medicacion"
+        android:title="Medicación">
+
+    </item>
+
+</menu>

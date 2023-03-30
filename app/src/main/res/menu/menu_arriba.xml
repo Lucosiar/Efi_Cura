@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id = "@+id/MedicosA"
+        android:title="Médicos">
+    </item>
+
+    <item
+        android:id ="@+id/CitasA"
+        android:title="Citas">
+    </item>
+
+    <item
+        android:id="@+id/MedicaciónA"
+        android:title="Medicación">
+    </item>
+    <item
+        android:id="@+id/Recargas"
+        android:title="Recargas"
+        />
+
+    <item
+        android:id="@+id/Compartir"
+        android:title="Compartir"
+        android:icon="@drawable/ic_baseline_share_24"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/Ajustes"
+        android:title="Ajustes"
+        android:icon="@drawable/ic_baseline_settings"
+        app:showAsAction="ifRoom" />
+</menu>

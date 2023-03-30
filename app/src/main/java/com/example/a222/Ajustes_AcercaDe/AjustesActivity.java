@@ -1,0 +1,99 @@
+package com.example.a222.Ajustes_AcercaDe;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.a222.AdminSQLiteOpenHelper;
+import com.example.a222.R;
+import com.example.a222.Registro_Login.InicioSesion;
+
+public class AjustesActivity extends AppCompatActivity {
+
+    Button cerrarSesion;
+
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+    String llave = "sesion";
+
+    TextView tvUsuario, tvCorreo;
+    String usu;
+    AdminSQLiteOpenHelper db;
+
+
+    //Ajustes
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_ajustes);
+
+        inicializar();
+
+        //Mostrar nombre y correo
+        preferences = getSharedPreferences("usuarios",Context.MODE_PRIVATE);
+        usu = preferences.getString("nombre", "");
+        tvUsuario.setText(usu);
+        tvCorreo.setText("Correo: " + consultarCorreo(usu));
+
+        tvCorreo.setTypeface(tvCorreo.getTypeface(), Typeface.ITALIC);
+
+        cerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+        });
+    }
+
+
+    //Cerrar sesion
+    private void logout(){
+        //Eliminamos los valores del sharedPreferences
+        SharedPreferences preferences2 = getSharedPreferences("usuarios", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = preferences2.edit();
+        editor2.clear();
+        editor2.apply();
+
+        //Cambiamos el checkBox
+        editor2.putBoolean(llave, false);
+        editor2.apply();
+
+        Toast.makeText(this, "Sesion cerrada", Toast.LENGTH_SHORT).show();
+
+        Intent i = new Intent(this, InicioSesion.class);
+        startActivity(i);
+        finish();
+
+    }
+
+    public void inicializar(){
+        cerrarSesion = findViewById(R.id.cerrarSesion);
+        tvUsuario = findViewById(R.id.tvUsuario);
+        tvCorreo = findViewById(R.id.tvCorreo);
+        db = new AdminSQLiteOpenHelper(this);
+    }
+
+    //Sacar el correo electronico de la base de datos
+    private String consultarCorreo(String usuario){
+        SQLiteDatabase base = db.getReadableDatabase();
+        Cursor cursor = base.rawQuery("select correo from usuarios where usuario = ?", new String[]{usuario});
+
+        String correo = "";
+        int columIndex = cursor.getColumnIndex("correo");
+        if(columIndex>=0 && cursor.moveToFirst()){
+            correo = cursor.getString(columIndex);
+        }
+        cursor.close();
+        return correo;
+    }
+}
