@@ -81,15 +81,21 @@ public class FormularioFinalActivity extends AppCompatActivity {
     public void cambiarPantalla(){
         //Instrucciones
         tvInstrucciones.setOnClickListener(v -> {
-           // Intent is = new Intent(ffa, FormularioActivityComida.class);
-            //startActivity(is);
+           Intent is = new Intent(ffa, FormularioActivityComida.class);
+            startActivity(is);
         });
 
         //Recargas
-        //tvRecargas.setOnClickListener(v ->{Intent rs = new Intent(ffa, FormularioRecargasActivity.class);startActivity(rs);});
+        tvRecargas.setOnClickListener(v ->{
+            Intent rs = new Intent(ffa, FormularioRecargasActivity.class);
+            startActivity(rs);
+        });
 
         //Duracion tratamiento
-        //tvTratamiento.setOnClickListener(v -> {Intent tt = new Intent(ffa, FormularioInicioMActivity.class);startActivity(tt);});
+        tvTratamiento.setOnClickListener(v -> {
+            Intent tt = new Intent(ffa, FormularioInicioMActivity.class);
+            startActivity(tt);
+        });
     }
 
     public void inicializar(){
