@@ -11,17 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiLogin"
         tools:targetApi="31">
-        <activity
-            android:name=".FormularioInicioMActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
         <!-- MAIN inicio sesion -->
         <activity
             android:name=".Registro_Login.InicioSesion"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.MiLogin.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,14 +32,16 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- Pagina principal HOME -->
+        </activity>
+        <!-- Pagina principal HOME -->
         <activity
             android:name=".FragmentosPP.PaginaPrincipal"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- CITA/MEDICO ACTIVITY // Añadir citas y medicos -->
+        </activity>
+        <!-- CITA/MEDICO ACTIVITY // Añadir citas y medicos -->
         <activity
             android:name=".FormularioCita_Medico.CitaActivity"
             android:exported="false">
@@ -59,7 +55,8 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- Ajustes_Acerca -->
+        </activity>
+        <!-- Ajustes_Acerca -->
         <activity
             android:name=".Ajustes_AcercaDe.AjustesActivity"
             android:exported="false">
@@ -73,7 +70,22 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- FormularioActivity -->
+        </activity>
+        <!-- FormularioActivity -->
+        <activity
+            android:name=".FormularioMedicacion.FormularioActivityComida"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".FormularioMedicacion.FormularioInicioMActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".FormularioMedicacion.Formulario1Activity"
             android:exported="false">

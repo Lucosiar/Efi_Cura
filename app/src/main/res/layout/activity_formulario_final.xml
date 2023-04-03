@@ -44,6 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15sp"
                     android:layout_marginTop="15sp"
+                    android:text="Nombre"
                     android:textColor="@color/white"
                     android:textSize="22sp" />
 
@@ -58,6 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15sp"
                         android:layout_marginTop="10sp"
+                        android:text="1"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
 
@@ -67,6 +69,19 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10sp"
                         android:layout_marginTop="10sp"
+                        android:text="pasti"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/cvCuando"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10sp"
+                        android:layout_marginTop="10sp"
+                        android:layout_marginEnd="5sp"
+                        android:layout_weight="1"
+                        android:text="Antes de comer"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -83,6 +98,7 @@
                         android:layout_marginStart="15sp"
                         android:layout_marginTop="10sp"
                         android:layout_weight="1"
+                        android:text="Cada x"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
 
@@ -105,6 +121,7 @@
                         android:layout_marginStart="15sp"
                         android:layout_marginTop="10sp"
                         android:layout_weight="1"
+                        android:text="8:00"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
                 </LinearLayout>

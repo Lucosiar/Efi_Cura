@@ -20,12 +20,12 @@ public class FormularioFinalActivity extends AppCompatActivity {
 
     TextView tvInstrucciones, tvRecargas, tvTratamiento;
     CardView idCardView;
-    TextView cvNombre, cvCantidadDiaria, cvFormato, cvFrecuencia, cvHora;
+    TextView cvNombre, cvCantidadDiaria, cvFormato, cvFrecuencia, cvHora, cvCuando;
     Activity ffa;
     Button botonFinalizar;
     AdminSQLiteOpenHelper db;
     SharedPreferences preferences;
-    String nombre, forma, cantidadDiaria, hora;
+    String nombre, forma, cantidadDiaria, hora, frecu, comer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,9 @@ public class FormularioFinalActivity extends AppCompatActivity {
         forma = preferences.getString("forma", "");
         cantidadDiaria = preferences.getString("cantidadDiaria", "");
         hora = preferences.getString("hora1", "");
+        frecu = preferences.getString("frecu", "");
+        comer = preferences.getString("notaComida", "");
+
 
         int canti = Integer.parseInt(cantidadDiaria);
 
@@ -56,8 +59,9 @@ public class FormularioFinalActivity extends AppCompatActivity {
         }else{
             cvFormato.setText(forma);
         }
-        //cvFrecuencia.setText(frecu);
         cvHora.setText(hora);
+        cvFrecuencia.setText(frecu);
+        cvCuando.setText(comer);
     }
 
 
@@ -112,6 +116,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
         cvFormato = idCardView.findViewById(R.id.cvFormato);
         cvFrecuencia = idCardView.findViewById(R.id.cvFrecuencia);
         cvHora = idCardView.findViewById(R.id.cvHora);
+        cvCuando = idCardView.findViewById(R.id.cvCuando);
 
         botonFinalizar = findViewById(R.id.botonFinalizar);
         ffa = this;

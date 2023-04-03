@@ -1,5 +1,8 @@
 package com.example.a222.Ajustes_AcercaDe;
 
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,10 +12,12 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.a222.AdminSQLiteOpenHelper;
 import com.example.a222.R;
@@ -25,6 +30,7 @@ public class AjustesActivity extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     String llave = "sesion";
+    Switch swModoOscuro;
 
     TextView tvUsuario, tvCorreo;
     String usu;
@@ -47,13 +53,11 @@ public class AjustesActivity extends AppCompatActivity {
 
         tvCorreo.setTypeface(tvCorreo.getTypeface(), Typeface.ITALIC);
 
-        cerrarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout();
-            }
-        });
+        cerrarSesion.setOnClickListener(v -> logout());
+
     }
+
+
 
 
     //Cerrar sesion
@@ -81,6 +85,7 @@ public class AjustesActivity extends AppCompatActivity {
         tvUsuario = findViewById(R.id.tvUsuario);
         tvCorreo = findViewById(R.id.tvCorreo);
         db = new AdminSQLiteOpenHelper(this);
+        swModoOscuro = findViewById(R.id.swModoOscuro);
     }
 
     //Sacar el correo electronico de la base de datos

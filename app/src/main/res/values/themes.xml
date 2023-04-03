@@ -14,9 +14,13 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.MiLogin.NoActionBar">
+    <style name="Theme.MiLogin.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/fondoAzul</item>
+        <item name="colorPrimaryVariant">@color/fondoAzul</item>
+        <item name="colorOnPrimary">@color/fondoAzul</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
 
     <style name="Theme.PagPrincipal" parent ="Theme.MaterialComponents.DayNight.DarkActionBar">

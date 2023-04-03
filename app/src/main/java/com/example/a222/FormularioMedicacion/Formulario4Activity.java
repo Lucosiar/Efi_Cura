@@ -18,11 +18,12 @@ public class Formulario4Activity extends AppCompatActivity {
     TextView tvPregunta, tvResFrecu, tvMedicaMasCanti;
     ListView listFrecuencia;
     Activity f4a;
+    SharedPreferences s;
+    SharedPreferences.Editor editor;
 
     private final String [] frecuencia = {"Una vez al día", "Dos veces al día", "Tres veces al día",
             "Cuatro veces al día", "Cada 6 horas", "Cuando sea necesario"};
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class Formulario4Activity extends AppCompatActivity {
         inicializarVariables();
 
         //Sacamos los valores del sharedPreferences
-        SharedPreferences s = getSharedPreferences("datos", MODE_PRIVATE);
+        s = getSharedPreferences("datos", MODE_PRIVATE);
         String nombre = s.getString("nombre", "");
         String formato = s.getString("forma", "");
         String cantidad = s.getString("cantidadDiaria", "");
@@ -55,9 +56,13 @@ public class Formulario4Activity extends AppCompatActivity {
 
             switch (tvResFrecu.getText().toString()){
                 case "Una vez al día":
+                    s = getSharedPreferences("datos", MODE_PRIVATE);
+                    editor = s.edit();
+                    editor.putString("frecu", "Una vez al día");
+                    editor.commit();
 
-                        Intent a = new Intent(f4a, FormularioHora.class);
-                        startActivity(a);
+                    Intent a = new Intent(f4a, FormularioHora.class);
+                    startActivity(a);
                     break;
 
                 case "Dos veces al día":
