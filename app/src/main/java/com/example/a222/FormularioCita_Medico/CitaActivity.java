@@ -152,7 +152,8 @@ public class CitaActivity extends AppCompatActivity {
             int ano = c.get(Calendar.YEAR);
 
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(citas, (view1, year, month, dayOfMonth) -> tvDia.setText(dayOfMonth + "/" + (month + 1) + "/" + year), dia, mes, ano);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(citas, (view1, year, month, dayOfMonth) -> 
+                tvDia.setText(dayOfMonth + "/" + (month + 1) + "/" + year), dia, mes, ano);
             //Seleccionamos la fecha actual del dispositivo
             datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
@@ -179,7 +180,8 @@ public class CitaActivity extends AppCompatActivity {
             int hora = c.get(Calendar.HOUR_OF_DAY);
             int minutos = c.get(Calendar.MINUTE);
 
-            TimePickerDialog timePickerDialog = new TimePickerDialog(citas, (view12, hourOfDay, minute) -> tvHora.setText(hourOfDay + ":" + minute), hora, minutos, true);
+            TimePickerDialog timePickerDialog = new TimePickerDialog(citas, (view12, hourOfDay, minute) ->
+                    tvHora.setText(hourOfDay + ":" + minute), hora, minutos, true);
             timePickerDialog.show();
         }
     }

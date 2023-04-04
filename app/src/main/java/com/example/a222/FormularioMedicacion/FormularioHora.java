@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,10 +40,15 @@ public class FormularioHora extends AppCompatActivity {
             hora = c.get(Calendar.HOUR_OF_DAY);
             min = c.get(Calendar.MINUTE);
 
-            TimePickerDialog timePickerDialog = new TimePickerDialog(horas, (view, hourOfDay, minute) ->
-                    tvMostrarHora.setText(hourOfDay + ":" + minute), hora, min, true);
-            timePickerDialog.show();
+            //TimePicker correcto
+            TimePickerDialog time = new TimePickerDialog(horas, ((view, hourOfDay, minute) -> {
+                String minutesST = minute < 10 ? "0" + minute : String.valueOf(minute);
+                tvMostrarHora.setText(hourOfDay + ":" + minutesST);
+            }), hora, min, true);
+            time.show();
         });
+
+
 
         buttonSiguiente.setOnClickListener(v -> {
             int i = 1;
@@ -54,9 +60,7 @@ public class FormularioHora extends AppCompatActivity {
             editor.commit();
             Intent fa = new Intent(horas, FormularioFinalActivity.class);
             startActivity(fa);
-
         });
-
     }
 
 
@@ -81,8 +85,8 @@ public class FormularioHora extends AppCompatActivity {
         tvMedicacionHora = findViewById(R.id.tvMedicacionHora);
         tvPreguntaHora = findViewById(R.id.tvPreguntaHora);
         tvCantidadHora = findViewById(R.id.tvCantidadHora);
-        selHora = findViewById(R.id.selHora);
-        tvMostrarHora = findViewById(R.id.tvMostrarHora);
+        selHora = findViewById(R.id.selDiaComienzo);
+        tvMostrarHora = findViewById(R.id.tvMostrarDiaComienzo);
         buttonSiguiente = findViewById(R.id.buttonSiguiente);
         horas = this;
         tvMostrarHora.setText("15:00");
