@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,6 +29,9 @@ public class FormularioInicioMActivity extends AppCompatActivity {
     ListView listaTiempo;
     private final String [] tiempos = {"5 días", "1 semana", "10 días", "30 días", "Elegir días", "Tratamiento en curso"};
 
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,11 @@ public class FormularioInicioMActivity extends AppCompatActivity {
         String fechaActual = formato.format(calendar.getTime());
         tvMostrarDiaComienzo.setText(fechaActual);
 
+        preferences = getSharedPreferences("datos", MODE_PRIVATE);
+        editor = preferences.edit();
+        editor.putString("fechaIni", fechaActual);
+        editor.apply();
+
         //Seleccionador de día para comienzo de la medicación
         selDiaComienzo.setOnClickListener(v -> {
             calendar = Calendar.getInstance();
@@ -50,8 +59,15 @@ public class FormularioInicioMActivity extends AppCompatActivity {
 
             calendar.set(ano,mes,dia);
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(inicio, (view, year, month, dayOfMonth) ->
-                tvMostrarDiaComienzo.setText(dayOfMonth + "/" + (month + 1) + "/" + year), ano, mes, dia);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(inicio, (view, year, month, dayOfMonth) ->{
+                String fecha = dayOfMonth + "/" + (month + 1) + "/" + year;
+
+                preferences = getSharedPreferences("datos", MODE_PRIVATE);
+                editor = preferences.edit();
+                editor.putString("fechaIni", fecha);
+                editor.apply();
+                tvMostrarDiaComienzo.setText(fecha);
+                }, ano, mes, dia);
 
             //Escoger el dia actual
             datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
@@ -60,6 +76,7 @@ public class FormularioInicioMActivity extends AppCompatActivity {
                     .init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), (view, year, monthOfYear, dayOfMonth) -> {
                 Calendar selectedDate = Calendar.getInstance();
                 selectedDate.set(year, monthOfYear, dayOfMonth);
+
             });
             datePickerDialog.show();
         });
@@ -69,34 +86,60 @@ public class FormularioInicioMActivity extends AppCompatActivity {
         listaTiempo.setAdapter(adapter);
 
         //
-        listaTiempo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int i, long l) {
-                tvRespu.setText("" + listaTiempo.getItemAtPosition(i));
-
-                switch ((tvRespu.getText().toString())){
-                    case "5 días":
-                        //Sumar 5 dias al tvMostrarDiaComienzo
-                        break;
-                    case "1 semana":
-                        //sumar 7 días
-                        break;
-                    case "10 días":
-                        //Sumar 10
-                        break;
-                    case "30 días":
-                        break;
-                    case "Elegir días":
-                        Intent is = new Intent(inicio, FormularioDuracionActivity.class);
-                        startActivity(is);
-                        break;
-                    case "Tratamiento en curso":
-                        //No se hace nada, fecha final == null
-                        break;
-                }
-
+        listaTiempo.setOnItemClickListener((parent, view, i, l) -> {
+            tvRespu.setText("" + listaTiempo.getItemAtPosition(i));
+            switch ((tvRespu.getText().toString())){
+                case "5 días":
+                    //Sumar 5 dias al tvMostrarDiaComienzo
+                    preferences = getSharedPreferences("datos", MODE_PRIVATE);
+                    editor = preferences.edit();
+                    editor.putInt("duracionTratamiento", 5);
+                    editor.apply();
+                    cambiarPantalla();
+                    break;
+                case "1 semana":
+                    //sumar 7 días
+                    preferences = getSharedPreferences("datos", MODE_PRIVATE);
+                    editor = preferences.edit();
+                    editor.putInt("duracionTratamiento", 7);
+                    editor.apply();
+                    cambiarPantalla();
+                    break;
+                case "10 días":
+                    //Sumar 10
+                    preferences = getSharedPreferences("datos", MODE_PRIVATE);
+                    editor = preferences.edit();
+                    editor.putInt("duracionTratamiento", 10);
+                    editor.apply();
+                    cambiarPantalla();
+                    break;
+                case "30 días":
+                    preferences = getSharedPreferences("datos", MODE_PRIVATE);
+                    editor = preferences.edit();
+                    editor.putInt("duracionTratamiento", 30);
+                    editor.apply();
+                    cambiarPantalla();
+                    break;
+                case "Elegir días":
+                    Intent is = new Intent(inicio, FormularioDuracionActivity.class);
+                    startActivity(is);
+                    break;
+                case "Tratamiento en curso":
+                    //No se hace nada, fecha final == null
+                    preferences = getSharedPreferences("datos", MODE_PRIVATE);
+                    editor = preferences.edit();
+                    editor.putString("duracionTratamiento", "Indefinido");
+                    editor.apply();
+                    cambiarPantalla();
+                    break;
             }
+
         });
+    }
+
+    public void cambiarPantalla(){
+        Intent a = new Intent(inicio, FormularioFinalActivity.class);
+        startActivity(a);
     }
 
 
@@ -108,5 +151,7 @@ public class FormularioInicioMActivity extends AppCompatActivity {
         tvRespu = findViewById(R.id.tvRespu);
 
         inicio = this;
+
+
     }
 }

@@ -142,12 +142,12 @@
             android:text="Recibir recordatorio de recarga"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:drawableLeftCompat="@drawable/ic_baseline_notification_important_24" />
+            app:drawableLeftCompat="@drawable/ic_baseline_notification_important_24"/>
 
 
         <TextView
             android:id="@+id/tvInstrucciones"
-            android:layout_width="wrap_content"
+            android:layout_width="379dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10sp"
             android:layout_marginTop="10sp"
@@ -156,7 +156,8 @@
             android:text="Añadir instrucciones a la toma"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:drawableLeftCompat="@drawable/ic_baseline_info_24" />
+            app:drawableLeftCompat="@drawable/ic_baseline_info_24"
+            app:drawableRightCompat="@drawable/ic_baseline_check" />
 
         <TextView
             android:id="@+id/tvTratamiento"
@@ -164,13 +165,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10sp"
             android:layout_marginTop="10sp"
-            android:layout_marginEnd="10sp"
             android:layout_marginBottom="5sp"
             android:drawablePadding="10dp"
-            android:text="Establecer duración del tratamiento"
+            android:text="Establecer duración tratamiento"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:drawableLeftCompat="@drawable/ic_baseline_calendar_month" />
+            app:drawableLeftCompat="@drawable/ic_baseline_calendar_month"
+            app:drawableRightCompat="@drawable/ic_baseline_check" />
 
         <Button
             android:id="@+id/botonFinalizar"

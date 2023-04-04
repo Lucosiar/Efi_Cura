@@ -25,7 +25,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
     Button botonFinalizar;
     AdminSQLiteOpenHelper db;
     SharedPreferences preferences;
-    String nombre, forma, cantidadDiaria, hora, frecu, comer;
+    String nombre, forma, cantidadDiaria, hora, frecu, comer, primerDia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
         hora = preferences.getString("hora1", "");
         frecu = preferences.getString("frecu", "");
         comer = preferences.getString("notaComida", "");
+        primerDia = preferences.getString("fechaIni", "");
 
 
         int canti = Integer.parseInt(cantidadDiaria);
@@ -62,6 +63,11 @@ public class FormularioFinalActivity extends AppCompatActivity {
         cvHora.setText(hora);
         cvFrecuencia.setText(frecu);
         cvCuando.setText(comer);
+
+        //MIrar porque no sale el check
+        if(primerDia.isEmpty()){
+            tvTratamiento.setCompoundDrawablesWithIntrinsicBounds(0, 0,0, 0);
+        }
     }
 
 
@@ -121,5 +127,10 @@ public class FormularioFinalActivity extends AppCompatActivity {
         botonFinalizar = findViewById(R.id.botonFinalizar);
         ffa = this;
         db = new AdminSQLiteOpenHelper(ffa);
+
+        if(cvCuando.getText().toString().isEmpty()){
+            tvInstrucciones.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        }
+
     }
 }
