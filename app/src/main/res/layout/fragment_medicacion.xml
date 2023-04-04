@@ -15,8 +15,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView2"
             android:layout_width="match_parent"
-            android:layout_height="510sp"
-            android:layout_marginTop="35sp" />
+            android:layout_height="136dp"
+            android:layout_marginStart="5sp"
+            android:layout_marginTop="35sp"
+            android:layout_marginEnd="5sp" />
 
         <Button
             android:id="@+id/botonAnadirMedicoFragment"

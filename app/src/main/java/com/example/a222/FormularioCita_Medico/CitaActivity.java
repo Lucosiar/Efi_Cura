@@ -145,11 +145,11 @@ public class CitaActivity extends AppCompatActivity {
         if(view == bDia){
             final Calendar c = Calendar.getInstance();
 
-            c.set(2022, 0, 1);
-
             int dia = c.get(Calendar.DAY_OF_MONTH);
             int mes = c.get(Calendar.MONTH);
             int ano = c.get(Calendar.YEAR);
+
+            c.set(ano, mes, dia);
 
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(citas, (view1, year, month, dayOfMonth) -> 
