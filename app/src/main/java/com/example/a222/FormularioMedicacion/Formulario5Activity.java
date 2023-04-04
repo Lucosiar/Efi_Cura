@@ -2,6 +2,7 @@ package com.example.a222.FormularioMedicacion;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a222.R;
+
+import java.io.IOException;
 
 public class Formulario5Activity extends AppCompatActivity {
 
@@ -64,7 +67,7 @@ public class Formulario5Activity extends AppCompatActivity {
         SharedPreferences s = getSharedPreferences("datos", MODE_PRIVATE);
         String nombre = s.getString("nombre", "");
         String formato = s.getString("forma", "");
-        String cantidad = s.getString("cantidad", "");
+        String cantidad = s.getString("cantidadDiaria", "");
 
         //Mostrar por pantalla medicacion, cantidad y formato
         int canInt = Integer.parseInt(cantidad);
