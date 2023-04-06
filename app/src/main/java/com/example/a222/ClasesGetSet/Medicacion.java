@@ -5,8 +5,8 @@ import java.util.Date;
 public class Medicacion {
     //Clase con los atributos de las medicaciones
 
-    public String nombre;
-    public String cantidadDiaria, duracion, cantidadCaja;
+    public String nombre, toma1,formato, notaComida;
+    public String cantidadDiaria, duracion, cantidadCaja, frecuencia;
     public String fechaFin, fechaIni;
 
     public String getNombre() {
@@ -56,4 +56,22 @@ public class Medicacion {
     public void setFechaIni(String fechaIni) {
         this.fechaIni = fechaIni;
     }
+
+    public String getToma1() {return toma1;}
+
+    public void setToma1(String toma1) {this.toma1 = toma1;}
+
+    public String getFormato() {return formato;}
+
+    public void setFormato(String formato) {this.formato = formato;}
+
+    public String getNotaComida() {return notaComida;}
+
+    public void setNotaComida(String notaComida) {this.notaComida = notaComida;}
+
+    public String getFrecuencia() {return frecuencia;}
+
+    public void setFrecuencia(String frecuencia) {this.frecuencia = frecuencia;}
 }
+
+

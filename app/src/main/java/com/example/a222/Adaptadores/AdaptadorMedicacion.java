@@ -33,6 +33,9 @@ public class AdaptadorMedicacion extends RecyclerView.Adapter<AdaptadorMedicacio
 
         holder.nomMedicacion.setText(medicacion.getNombre());
         holder.cantidadDiariaMedicacion.setText(medicacion.getCantidadDiaria());
+        holder.formatoMedicacion.setText(medicacion.getFormato());
+        holder.horaMedicacion.setText(medicacion.getToma1());
+        holder.diaMedicacion.setText(medicacion.getFrecuencia());
     }
 
     @Override
@@ -41,7 +44,7 @@ public class AdaptadorMedicacion extends RecyclerView.Adapter<AdaptadorMedicacio
     }
 
     public static class MedicacionViewHolder extends RecyclerView.ViewHolder{
-        TextView nomMedicacion, cantidadDiariaMedicacion, formatoMedicacion;
+        TextView nomMedicacion, cantidadDiariaMedicacion, formatoMedicacion, diaMedicacion, horaMedicacion;
         public MedicacionViewHolder(View view) {
             super(view);
 
@@ -49,6 +52,8 @@ public class AdaptadorMedicacion extends RecyclerView.Adapter<AdaptadorMedicacio
             nomMedicacion = view.findViewById(R.id.nomMedicacion);
             cantidadDiariaMedicacion = view.findViewById(R.id.cantidadDiariaMedicacion);
             formatoMedicacion = view.findViewById(R.id.formatoMedicacion);
+            horaMedicacion = view.findViewById(R.id.horaMedicacion);
+            diaMedicacion = view.findViewById(R.id.diaMedicacion);
         }
     }
 }
