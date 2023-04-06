@@ -6,8 +6,8 @@ public class Medicacion {
     //Clase con los atributos de las medicaciones
 
     public String nombre;
-    public int cantidadDiaria, duracion, cantidadCaja;
-    public Date fechaFin, fechaIni;
+    public String cantidadDiaria, duracion, cantidadCaja;
+    public String fechaFin, fechaIni;
 
     public String getNombre() {
         return nombre;
@@ -17,43 +17,43 @@ public class Medicacion {
         this.nombre = nombre;
     }
 
-    public int getCantidadDiaria() {
+    public String getCantidadDiaria() {
         return cantidadDiaria;
     }
 
-    public void setCantidadDiaria(int cantidadDiaria) {
+    public void setCantidadDiaria(String cantidadDiaria) {
         this.cantidadDiaria = cantidadDiaria;
     }
 
-    public int getDuracion() {
+    public String getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(int duracion) {
+    public void setDuracion(String duracion) {
         this.duracion = duracion;
     }
 
-    public int getCantidadCaja() {
+    public String getCantidadCaja() {
         return cantidadCaja;
     }
 
-    public void setCantidadCaja(int cantidadCaja) {
+    public void setCantidadCaja(String cantidadCaja) {
         this.cantidadCaja = cantidadCaja;
     }
 
-    public Date getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
 
-    public Date getFechaIni() {
+    public String getFechaIni() {
         return fechaIni;
     }
 
-    public void setFechaIni(Date fechaIni) {
+    public void setFechaIni(String fechaIni) {
         this.fechaIni = fechaIni;
     }
 }

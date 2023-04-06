@@ -85,7 +85,7 @@ public class MedicacionFragment extends Fragment {
         while(cursor.moveToNext()){
             medicacion = new Medicacion();
             medicacion.setNombre(cursor.getString(0));
-            medicacion.setCantidadDiaria((cursor.getInt(1)));
+            medicacion.setCantidadDiaria((cursor.getString(1)));
 
             medicacionList.add(medicacion);
         }

@@ -41,13 +41,14 @@ public class AdaptadorMedicacion extends RecyclerView.Adapter<AdaptadorMedicacio
     }
 
     public static class MedicacionViewHolder extends RecyclerView.ViewHolder{
-        TextView nomMedicacion, cantidadDiariaMedicacion;
+        TextView nomMedicacion, cantidadDiariaMedicacion, formatoMedicacion;
         public MedicacionViewHolder(View view) {
             super(view);
 
             //Definimos el click listener para el view holder
-            nomMedicacion = view.findViewById(R.id.nomMedicacion_2);
-            cantidadDiariaMedicacion = view.findViewById(R.id.cantidadDiariaMedicacion_2);
+            nomMedicacion = view.findViewById(R.id.nomMedicacion);
+            cantidadDiariaMedicacion = view.findViewById(R.id.cantidadDiariaMedicacion);
+            formatoMedicacion = view.findViewById(R.id.formatoMedicacion);
         }
     }
 }

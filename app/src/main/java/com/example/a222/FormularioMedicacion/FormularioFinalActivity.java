@@ -7,13 +7,17 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.a222.AdminSQLiteOpenHelper;
+import com.example.a222.FragmentosPP.MedicacionFragment;
+import com.example.a222.FragmentosPP.PaginaPrincipal;
 import com.example.a222.R;
 
 public class FormularioFinalActivity extends AppCompatActivity {
@@ -25,7 +29,8 @@ public class FormularioFinalActivity extends AppCompatActivity {
     Button botonFinalizar;
     AdminSQLiteOpenHelper db;
     SharedPreferences preferences;
-    String nombre, forma, cantidadDiaria, hora, frecu, comer, primerDia;
+    SharedPreferences.Editor editor;
+    String nombre, forma, cantidadDiaria, hora, frecu, notaComida, primerDia, fechaIni, fechaFin,duracion, usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,25 +40,37 @@ public class FormularioFinalActivity extends AppCompatActivity {
         inicializar();
         cambiarPantalla();
         sacarDatosSP();
+        ponerCheck();
 
+        botonFinalizar.setOnClickListener(v -> {
+            guardarSQL();
+            borrarSP();
+
+            Intent as = new Intent(ffa, PaginaPrincipal.class);
+            startActivity(as);
+        });
 
     }
 
 
     public void sacarDatosSP(){
+        //Sacamos los datos del sp
         preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
         nombre = preferences.getString("nombre", "");
         forma = preferences.getString("forma", "");
         cantidadDiaria = preferences.getString("cantidadDiaria", "");
         hora = preferences.getString("hora1", "");
         frecu = preferences.getString("frecu", "");
-        comer = preferences.getString("notaComida", "");
+        notaComida = preferences.getString("notaComida", "");
         primerDia = preferences.getString("fechaIni", "");
 
-
+        //Parseamos la cantidad para poder poner bien el formato
         int canti = Integer.parseInt(cantidadDiaria);
 
+        //Mostramos el nombre del medicamento en el cardview
+        //Todos los atributos que empiecen por cv son del cardview
         cvNombre.setText(nombre);
+
         cvCantidadDiaria.setText(cantidadDiaria);
         if(canti >= 2){
             cvFormato.setText(forma + "s");
@@ -62,18 +79,35 @@ public class FormularioFinalActivity extends AppCompatActivity {
         }
         cvHora.setText(hora);
         cvFrecuencia.setText(frecu);
-        cvCuando.setText(comer);
+        cvCuando.setText(notaComida);
 
-        //MIrar porque no sale el check
-        if(primerDia.isEmpty()){
-            tvTratamiento.setCompoundDrawablesWithIntrinsicBounds(0, 0,0, 0);
-        }
+
+        //Sacamos los valores del sp
+        fechaFin = preferences.getString("fechaFin", "");
+        fechaIni = preferences.getString("fechaIni", "");
+        duracion = preferences.getString("duracion", "");
+
+    }
+
+    public void guardarSQL(){
+        //Sacamos el usuario del sp para guardarlo
+        preferences = getSharedPreferences("usuarios", Context.MODE_PRIVATE);
+        usuario = preferences.getString("nombre", "");
+        usuario = consultarCorreo(usuario);
+
+        db.insertarMedicacion(nombre, cantidadDiaria, fechaIni, fechaFin, duracion, hora, cantidadDiaria, forma, notaComida, usuario);
+        Toast.makeText(ffa, "La medicación ha sido guarda", Toast.LENGTH_SHORT).show();
     }
 
 
-    //public void volcarSQLite(){}
 
-    //public void borrarSP(){}
+    public void borrarSP(){
+        preferences = getSharedPreferences("datos", MODE_PRIVATE);
+        editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+
+    }
 
     private String consultarCorreo(String usuario){
         SQLiteDatabase base = db.getReadableDatabase();
@@ -86,6 +120,20 @@ public class FormularioFinalActivity extends AppCompatActivity {
         }
         cursor.close();
         return correo;
+    }
+
+    public void ponerCheck(){
+        if(primerDia.isEmpty()){
+            tvTratamiento.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_calendar_month, 0, 0, 0);
+        }else{
+            tvTratamiento.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_calendar_month, 0, R.drawable.ic_baseline_check, 0);
+        }
+
+        if(cvCuando.getText().toString().isEmpty()){
+            tvInstrucciones.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_info_24, 0, 0, 0);
+        }else{
+            tvInstrucciones.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_info_24, 0, R.drawable.ic_baseline_check, 0);
+        }
     }
 
     public void cambiarPantalla(){
@@ -128,9 +176,6 @@ public class FormularioFinalActivity extends AppCompatActivity {
         ffa = this;
         db = new AdminSQLiteOpenHelper(ffa);
 
-        if(cvCuando.getText().toString().isEmpty()){
-            tvInstrucciones.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-        }
 
     }
 }

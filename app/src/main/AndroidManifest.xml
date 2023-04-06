@@ -40,7 +40,8 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- CITA/MEDICO ACTIVITY // Añadir citas y medicos -->
+        </activity>
+        <!-- CITA/MEDICO ACTIVITY // Añadir citas y medicos -->
         <activity
             android:name=".FormularioCita_Medico.CitaActivity"
             android:exported="false">

@@ -24,8 +24,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("create table usuarios(usuario TEXT, contra TEXT, correo TEXT Primary key, cumple date)");
 
         //Medicaciones
-        db.execSQL("create table medicacion(nombre text primary key, cantidadDiaria int, fechaIni date, " +
-                "fechaFin date, duracion int, toma1 time, cantidadCaja int, formato TEXT, " +
+        db.execSQL("create table medicacion(nombre text primary key, cantidadDiaria int, fechaIni text, " +
+                "fechaFin text, duracion int, toma1 text, cantidadCaja int, formato TEXT, " +
                 "notaComida TEXT, usuario TEXT)");
 
         //Medicos
@@ -108,6 +108,27 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
             db.execSQL("insert into citas values ('" + nombreMedico + "', '"
             + dia + "', '" + hora + "')");*/
 
+        db.close();
+
+    }
+
+    public void insertarMedicacion(String nombre, String cantidadDiaria, String fechaIni, String fechaFin, String duracion,
+                                   String toma1, String cantidadCaja, String formato, String notaComida, String usuario){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("nombre", nombre);
+        values.put("cantidadDiaria", cantidadDiaria);
+        values.put("cantidadCaja", cantidadCaja);
+        values.put("fechaIni", fechaIni);
+        values.put("fechaFin", fechaFin);
+        values.put("duracion", duracion);
+        values.put("toma1", toma1);
+        values.put("formato", formato);
+        values.put("notaComida", notaComida);
+        values.put("usuario", usuario);
+        db.insert("medicacion", null, values);
         db.close();
 
     }

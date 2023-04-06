@@ -37,11 +37,12 @@ public class FormularioDuracionActivity extends AppCompatActivity {
 
         aceptarDias.setOnClickListener(v -> {
             int valorSeleccionado = tvNumberPicker.getValue();
+            String s = String.valueOf(valorSeleccionado);
 
             preferences = getSharedPreferences("datos", MODE_PRIVATE);
             editor = preferences.edit();
 
-            editor.putInt("duracionTratamiento", valorSeleccionado);
+            editor.putString("duracionTratamiento", s);
             editor.apply();
 
             Intent a = new Intent(duracion, FormularioFinalActivity.class);
@@ -58,8 +59,5 @@ public class FormularioDuracionActivity extends AppCompatActivity {
         aceptarDias = findViewById(R.id.aceptarDias);
 
         duracion = this;
-
-
-
     }
 }
