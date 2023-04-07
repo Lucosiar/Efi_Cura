@@ -3,6 +3,7 @@ package com.example.a222.Registro_Login;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,7 @@ public class InicioSesion extends AppCompatActivity {
     Button inicio, registro;
     AdminSQLiteOpenHelper db;
     CheckBox cbIniSesion;
-
+Context context;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
@@ -90,6 +91,12 @@ public class InicioSesion extends AppCompatActivity {
 
     //Boton para pasar a la pantalla de registro
     public void registrar(View view) {
+        db = new AdminSQLiteOpenHelper(context);
+        SQLiteDatabase dd = db.getWritableDatabase();
+        //dd.execSQL("drop table if exists medicacion");
+        //dd.execSQL("create table medicacion(nombre text primary key, cantidadDiaria text, fechaIni text, " +
+                //"fechaFin text, duracion int, frecuencia text, toma1 text, cantidadCaja int, formato Text, notaComida text, usuario text)");
+
         Intent i = new Intent(this, Registro.class);
         startActivity(i);
     }
@@ -121,5 +128,6 @@ public class InicioSesion extends AppCompatActivity {
 
         preferences = getSharedPreferences("usuarios", Context.MODE_PRIVATE);
         editor = preferences.edit();
+        context = this;
     }
 }

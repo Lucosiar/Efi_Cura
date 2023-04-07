@@ -66,7 +66,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10sp"
                 android:layout_marginTop="5sp"
-                android:layout_marginEnd="5sp"
                 android:layout_weight="1"
                 android:text="00:00"
                 android:textColor="@color/white"
@@ -74,9 +73,10 @@
 
             <TextView
                 android:id="@+id/instruccionMedicacion"
-                android:layout_width="305dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5sp"
+                android:layout_marginEnd="10sp"
                 android:layout_weight="1"
                 android:text="Comida"
                 android:textColor="@color/white"

@@ -25,8 +25,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
         //Medicaciones
         db.execSQL("create table medicacion(nombre text primary key, cantidadDiaria int, fechaIni text, " +
-                "fechaFin text, duracion int, toma1 text, cantidadCaja int, formato TEXT, " +
-                "notaComida TEXT, usuario TEXT)");
+               "fechaFin text, duracion int, toma1 text, cantidadCaja int, formato TEXT, "
+                + "notaComida TEXT, usuario TEXT)");
 
         //Medicos
         db.execSQL("create table medicos(id int Primary key, nombre TEXT, especialidad text, hospital text, numero String, correo text, usuario TEXT)");

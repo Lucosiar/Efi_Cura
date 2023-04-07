@@ -35,6 +35,9 @@ public class MedicacionFragment extends Fragment {
     Context context;
     FragmentActivity medicaciones;
     AdminSQLiteOpenHelper db;
+    String notaComida;
+    int cantidad;
+    String formato;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,13 +86,38 @@ public class MedicacionFragment extends Fragment {
             medicacion = new Medicacion();
             medicacion.setNombre(cursor.getString(0));
             medicacion.setCantidadDiaria((cursor.getString(1)));
-            medicacion.setFormato((cursor.getString(7)));
-            medicacion.setToma1((cursor.getString(5)));
-            medicacion.setNotaComida((cursor.getString(8)));
+            formato = cursor.getString(8);
+            cantidad = Integer.parseInt(cursor.getString(1));
+            if(cantidad >= 2){
+                medicacion.setFormato(formato + "s");
+            }else{
+                medicacion.setFormato(formato);
+            }
+            medicacion.setToma1((cursor.getString(6)));
+            medicacion.setNotaComida((cursor.getString(9)));
+
+
+            if(cursor.getString(5).equals(("Cuando lo necesite"))){
+                notaComida = "Cuando lo necesite";
+                medicacion.setToma1(notaComida);
+            }else{
+                medicacion.setToma1((cursor.getString(5)));
+            }
 
 
             medicacionList.add(medicacion);
+
+            /*medicacion.setToma1((cursor.getString(6)));
+            if(cursor.getString(5).equals("Cuando sea necesario")){
+                notaComida = "Cuando lo necesite";
+                medicacion.setNotaComida(notaComida);
+
+            }else{
+                medicacion.setNotaComida((cursor.getString(9)));
+            }*/
         }
+
+
     }
 
     public void inicializar(){

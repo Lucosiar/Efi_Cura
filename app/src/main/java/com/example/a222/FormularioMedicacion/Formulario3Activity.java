@@ -17,7 +17,7 @@ public class Formulario3Activity extends AppCompatActivity {
 
     TextView tvMedicacion, tvFormato, tvMostrar, tvCantidad, tvRespuesta;
     ListView list;
-    private final String [] opciones = {"Si", "No"};
+    private final String [] opciones = {"Si", "No", "Cuando sea necesario"};
     Activity siguiente;
 
     @Override
@@ -59,6 +59,12 @@ public class Formulario3Activity extends AppCompatActivity {
                     case "No":
                         Intent v = new Intent(siguiente, Formulario5Activity.class);
                         startActivity(v);
+                        break;
+                    case "Cuando sea necesario":
+                        editor.putString("frecu", "Cuando lo necesite");
+                        editor.commit();
+                        Intent ff = new Intent(siguiente, FormularioFinalActivity.class);
+                        startActivity(ff);
                         break;
                 }
             }

@@ -58,8 +58,8 @@ public class FormularioFinalActivity extends AppCompatActivity {
         //Sacamos los datos del sp
         preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
         nombre = preferences.getString("nombre", "");
-        forma = preferences.getString("forma", "");
         cantidadDiaria = preferences.getString("cantidadDiaria", "");
+        forma = preferences.getString("forma", "");
         hora = preferences.getString("hora1", "");
         frecu = preferences.getString("frecu", "");
         notaComida = preferences.getString("notaComida", "");
