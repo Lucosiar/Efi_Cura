@@ -47,12 +47,9 @@ public class MedicacionFragment extends Fragment {
 
         //Boton inferior para añadir nuevos medicamentos
         botonAnadirMedicacionFragment = view.findViewById(R.id.botonAnadirMedicoFragment);
-        botonAnadirMedicacionFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), Formulario1Activity.class);
-                startActivity(i);
-            }
+        botonAnadirMedicacionFragment.setOnClickListener(v -> {
+            Intent i = new Intent(getActivity(), Formulario1Activity.class);
+            startActivity(i);
         });
 
         //Base de datos de medicacion
@@ -86,6 +83,10 @@ public class MedicacionFragment extends Fragment {
             medicacion = new Medicacion();
             medicacion.setNombre(cursor.getString(0));
             medicacion.setCantidadDiaria((cursor.getString(1)));
+            medicacion.setFormato((cursor.getString(7)));
+            medicacion.setToma1((cursor.getString(5)));
+            medicacion.setNotaComida((cursor.getString(8)));
+
 
             medicacionList.add(medicacion);
         }

@@ -45,7 +45,7 @@ public class FormularioActivityComida extends AppCompatActivity {
             editor.commit();
 
             switch (respuesta){
-                case "Antes de comer":  case "Después de comer": case "No importa": case "A la hora de comer":
+                case "Antes de comer":  case "Despues de comer": case "No importa": case "A la hora de comer":
                     Intent ii = new Intent(fc, FormularioFinalActivity.class);
                     startActivity(ii);
                     break;

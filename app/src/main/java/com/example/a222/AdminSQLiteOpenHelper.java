@@ -113,7 +113,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     public void insertarMedicacion(String nombre, String cantidadDiaria, String fechaIni, String fechaFin, String duracion,
-                                   String toma1, String cantidadCaja, String formato, String notaComida, String usuario){
+                                   String toma1, String cantidadCaja, String formato, String notaComida, String frecuencia, String usuario){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -127,6 +127,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put("toma1", toma1);
         values.put("formato", formato);
         values.put("notaComida", notaComida);
+        values.put("frecuencia", frecuencia);
         values.put("usuario", usuario);
         db.insert("medicacion", null, values);
         db.close();

@@ -44,11 +44,6 @@ public class FormularioInicioMActivity extends AppCompatActivity {
         String fechaActual = formato.format(calendar.getTime());
         tvMostrarDiaComienzo.setText(fechaActual);
 
-        preferences = getSharedPreferences("datos", MODE_PRIVATE);
-        editor = preferences.edit();
-        editor.putString("fechaIni", fechaActual);
-        editor.apply();
-
         //Seleccionador de día para comienzo de la medicación
         selDiaComienzo.setOnClickListener(v -> {
             calendar = Calendar.getInstance();
@@ -93,7 +88,7 @@ public class FormularioInicioMActivity extends AppCompatActivity {
                     //Sumar 5 dias al tvMostrarDiaComienzo
                     preferences = getSharedPreferences("datos", MODE_PRIVATE);
                     editor = preferences.edit();
-                    editor.putInt("duracionTratamiento", 5);
+                    editor.putInt("duracion", 5);
                     editor.apply();
                     cambiarPantalla();
                     break;
@@ -101,7 +96,7 @@ public class FormularioInicioMActivity extends AppCompatActivity {
                     //sumar 7 días
                     preferences = getSharedPreferences("datos", MODE_PRIVATE);
                     editor = preferences.edit();
-                    editor.putInt("duracionTratamiento", 7);
+                    editor.putInt("duracion", 7);
                     editor.apply();
                     cambiarPantalla();
                     break;
@@ -109,14 +104,14 @@ public class FormularioInicioMActivity extends AppCompatActivity {
                     //Sumar 10
                     preferences = getSharedPreferences("datos", MODE_PRIVATE);
                     editor = preferences.edit();
-                    editor.putInt("duracionTratamiento", 10);
+                    editor.putInt("duracion", 10);
                     editor.apply();
                     cambiarPantalla();
                     break;
                 case "30 días":
                     preferences = getSharedPreferences("datos", MODE_PRIVATE);
                     editor = preferences.edit();
-                    editor.putInt("duracionTratamiento", 30);
+                    editor.putInt("duracion", 30);
                     editor.apply();
                     cambiarPantalla();
                     break;
@@ -128,7 +123,7 @@ public class FormularioInicioMActivity extends AppCompatActivity {
                     //No se hace nada, fecha final == null
                     preferences = getSharedPreferences("datos", MODE_PRIVATE);
                     editor = preferences.edit();
-                    editor.putString("duracionTratamiento", "Indefinido");
+                    editor.putInt("duracion", 0);
                     editor.apply();
                     cambiarPantalla();
                     break;

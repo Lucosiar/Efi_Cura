@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,9 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.a222.AdminSQLiteOpenHelper;
-import com.example.a222.FragmentosPP.MedicacionFragment;
 import com.example.a222.FragmentosPP.PaginaPrincipal;
 import com.example.a222.R;
+
 
 public class FormularioFinalActivity extends AppCompatActivity {
 
@@ -30,7 +29,9 @@ public class FormularioFinalActivity extends AppCompatActivity {
     AdminSQLiteOpenHelper db;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-    String nombre, forma, cantidadDiaria, hora, frecu, notaComida, primerDia, fechaIni, fechaFin,duracion, usuario;
+    String nombre, forma, cantidadDiaria, hora, frecu, notaComida, primerDia, fechaIni, fechaFin, usuario;
+    int duracion;
+    String duracionS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,10 @@ public class FormularioFinalActivity extends AppCompatActivity {
         frecu = preferences.getString("frecu", "");
         notaComida = preferences.getString("notaComida", "");
         primerDia = preferences.getString("fechaIni", "");
+        //Sacamos los valores de la fecha Inicial  y la duracion
+        fechaIni = preferences.getString("fechaIni", "");
+        duracion = preferences.getInt("duracion", 0);
+        fechaFin = preferences.getString("fechaFin", "SINFCH");
 
         //Parseamos la cantidad para poder poner bien el formato
         int canti = Integer.parseInt(cantidadDiaria);
@@ -82,10 +87,8 @@ public class FormularioFinalActivity extends AppCompatActivity {
         cvCuando.setText(notaComida);
 
 
-        //Sacamos los valores del sp
-        fechaFin = preferences.getString("fechaFin", "");
-        fechaIni = preferences.getString("fechaIni", "");
-        duracion = preferences.getString("duracion", "");
+
+
 
     }
 
@@ -95,7 +98,10 @@ public class FormularioFinalActivity extends AppCompatActivity {
         usuario = preferences.getString("nombre", "");
         usuario = consultarCorreo(usuario);
 
-        db.insertarMedicacion(nombre, cantidadDiaria, fechaIni, fechaFin, duracion, hora, cantidadDiaria, forma, notaComida, usuario);
+        duracionS = String.valueOf(duracion);
+
+        //Insertamos todos los valores en la base de datos
+        db.insertarMedicacion(nombre, cantidadDiaria, fechaIni, fechaFin, duracionS, hora, cantidadDiaria, forma, notaComida, frecu, usuario);
         Toast.makeText(ffa, "La medicación ha sido guarda", Toast.LENGTH_SHORT).show();
     }
 
@@ -106,7 +112,6 @@ public class FormularioFinalActivity extends AppCompatActivity {
         editor = preferences.edit();
         editor.clear();
         editor.apply();
-
     }
 
     private String consultarCorreo(String usuario){
@@ -175,7 +180,5 @@ public class FormularioFinalActivity extends AppCompatActivity {
         botonFinalizar = findViewById(R.id.botonFinalizar);
         ffa = this;
         db = new AdminSQLiteOpenHelper(ffa);
-
-
     }
 }

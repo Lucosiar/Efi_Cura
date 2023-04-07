@@ -11,8 +11,8 @@
 
 
     <LinearLayout
-        android:layout_width="347dp"
-        android:layout_height="114dp"
+        android:layout_width="372dp"
+        android:layout_height="107dp"
         android:layout_marginLeft="10sp"
         android:layout_marginTop="10sp"
         android:orientation="vertical">
@@ -21,6 +21,7 @@
             android:id="@+id/nomMedicacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
             android:layout_marginTop="5sp"
             android:layout_marginBottom="5sp"
             android:text="Nombre Medicamento"
@@ -36,6 +37,7 @@
                 android:id="@+id/cantidadDiariaMedicacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
                 android:layout_marginBottom="5sp"
                 android:text="1"
                 android:textColor="@color/white"
@@ -50,6 +52,7 @@
                 android:text="Pasti"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -58,30 +61,26 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/diaMedicacion"
-                android:layout_width="59dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5sp"
-                android:layout_weight="1"
-                android:text="Cada día"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-            <TextView
                 android:id="@+id/horaMedicacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5sp"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="5sp"
+                android:layout_marginEnd="5sp"
                 android:layout_weight="1"
-                android:text="8:00"
+                android:text="00:00"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textView31"
-                android:layout_width="156dp"
+                android:id="@+id/instruccionMedicacion"
+                android:layout_width="305dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_marginTop="5sp"
+                android:layout_weight="1"
+                android:text="Comida"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
         </LinearLayout>
 
     </LinearLayout>

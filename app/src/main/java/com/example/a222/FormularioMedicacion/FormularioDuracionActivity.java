@@ -34,15 +34,13 @@ public class FormularioDuracionActivity extends AppCompatActivity {
                 tvMuestras.setText(String.format("Quedan %s días para terminar el tratamiento", newVal)));
 
 
-
         aceptarDias.setOnClickListener(v -> {
             int valorSeleccionado = tvNumberPicker.getValue();
-            String s = String.valueOf(valorSeleccionado);
 
             preferences = getSharedPreferences("datos", MODE_PRIVATE);
             editor = preferences.edit();
 
-            editor.putString("duracionTratamiento", s);
+            editor.putInt("duracion", valorSeleccionado);
             editor.apply();
 
             Intent a = new Intent(duracion, FormularioFinalActivity.class);
