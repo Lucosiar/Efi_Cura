@@ -93,9 +93,9 @@ Context context;
     public void registrar(View view) {
         db = new AdminSQLiteOpenHelper(context);
         SQLiteDatabase dd = db.getWritableDatabase();
-        //dd.execSQL("drop table if exists medicacion");
-        //dd.execSQL("create table medicacion(nombre text primary key, cantidadDiaria text, fechaIni text, " +
-                //"fechaFin text, duracion int, frecuencia text, toma1 text, cantidadCaja int, formato Text, notaComida text, usuario text)");
+        dd.execSQL("drop table if exists medicacion");
+        dd.execSQL("create table medicacion(nombre text primary key, cantidadDiaria text, fechaIni text, " +
+                "fechaFin text, duracion int, frecuencia text, toma1 text, toma2 text, toma3 text, toma4 text, cantidadCaja int, formato Text, notaComida text, usuario text)");
 
         Intent i = new Intent(this, Registro.class);
         startActivity(i);

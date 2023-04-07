@@ -22,7 +22,7 @@ public class Formulario4Activity extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
     private final String [] frecuencia = {"Una vez al día", "Dos veces al día", "Tres veces al día",
-            "Cuatro veces al día", "Cada 6 horas", "Cuando sea necesario"};
+            "Cuatro veces al día"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,32 +65,29 @@ public class Formulario4Activity extends AppCompatActivity {
                     startActivity(a);
                     break;
 
-                case "Dos veces al día":
+                case "Dos veces al día": //Cada 12 horas
+                    s = getSharedPreferences("datos", MODE_PRIVATE);
+                    editor = s.edit();
+                    editor.putString("frecu", "Dos veces al día");
+                    editor.commit();
 
                     break;
 
-                case "Tres veces al día":
-
+                case "Tres veces al día": //Cada 8 horas
+                    s = getSharedPreferences("datos", MODE_PRIVATE);
+                    editor = s.edit();
+                    editor.putString("frecu", "Tres veces al día");
+                    editor.commit();
                     break;
 
-                case "Cuatro veces al día":
-
+                case "Cuatro veces al día": //4 veces al día es lo mismo que cada 6 horas
+                    s = getSharedPreferences("datos", MODE_PRIVATE);
+                    editor = s.edit();
+                    editor.putString("frecu", "Cuatro veces al día");
+                    editor.commit();
                     break;
-
-                case "Cada 6 horas":
-
-                    break;
-
-                case "Cuando sea necesario":
-                    Intent csn = new Intent(f4a, FormularioFinalActivity.class);
-                    startActivity(csn);
-                    break;
-
             }
-
-
         });
-
     }
 
     //Cambiar cuando terminee

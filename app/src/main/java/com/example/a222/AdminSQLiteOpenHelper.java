@@ -25,7 +25,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
         //Medicaciones
         db.execSQL("create table medicacion(nombre text primary key, cantidadDiaria int, fechaIni text, " +
-               "fechaFin text, duracion int, toma1 text, cantidadCaja int, formato TEXT, "
+               "fechaFin text, duracion int, toma1 text, toma2 text, toma3 text, toma4 text, cantidadCaja int, formato TEXT, "
                 + "notaComida TEXT, usuario TEXT)");
 
         //Medicos
@@ -112,22 +112,25 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insertarMedicacion(String nombre, String cantidadDiaria, String fechaIni, String fechaFin, String duracion,
-                                   String toma1, String cantidadCaja, String formato, String notaComida, String frecuencia, String usuario){
+    public void insertarMedicacion(String nombre, String cantidadDiaria, String fechaIni, String fechaFin, String duracion, String frecuencia,
+                                   String toma1, String toma2, String toma3, String toma4, String cantidadCaja, String formato, String notaComida, String usuario){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put("nombre", nombre);
         values.put("cantidadDiaria", cantidadDiaria);
-        values.put("cantidadCaja", cantidadCaja);
         values.put("fechaIni", fechaIni);
         values.put("fechaFin", fechaFin);
         values.put("duracion", duracion);
+        values.put("frecuencia", frecuencia);
         values.put("toma1", toma1);
+        values.put("toma2", toma2);
+        values.put("toma3", toma3);
+        values.put("toma4", toma4);
+        values.put("cantidadCaja", cantidadCaja);
         values.put("formato", formato);
         values.put("notaComida", notaComida);
-        values.put("frecuencia", frecuencia);
         values.put("usuario", usuario);
         db.insert("medicacion", null, values);
         db.close();

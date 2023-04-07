@@ -29,7 +29,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
     AdminSQLiteOpenHelper db;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-    String nombre, forma, cantidadDiaria, hora, frecu, notaComida, primerDia, fechaIni, fechaFin, usuario;
+    String nombre, forma, cantidadDiaria, hora1, frecu, notaComida, primerDia, fechaIni, fechaFin, usuario, hora2, hora3, hora4;
     int duracion;
     String duracionS;
 
@@ -60,10 +60,12 @@ public class FormularioFinalActivity extends AppCompatActivity {
         nombre = preferences.getString("nombre", "");
         cantidadDiaria = preferences.getString("cantidadDiaria", "");
         forma = preferences.getString("forma", "");
-        hora = preferences.getString("hora1", "");
+        hora1 = preferences.getString("hora1", "");
+        hora2 = preferences.getString("hora2", "");
+        hora3 = preferences.getString("hora3", "");
+        hora4 = preferences.getString("hora4", "");
         frecu = preferences.getString("frecu", "");
         notaComida = preferences.getString("notaComida", "");
-        primerDia = preferences.getString("fechaIni", "");
         //Sacamos los valores de la fecha Inicial  y la duracion
         fechaIni = preferences.getString("fechaIni", "");
         duracion = preferences.getInt("duracion", 0);
@@ -82,12 +84,9 @@ public class FormularioFinalActivity extends AppCompatActivity {
         }else{
             cvFormato.setText(forma);
         }
-        cvHora.setText(hora);
+        cvHora.setText(hora1);
         cvFrecuencia.setText(frecu);
         cvCuando.setText(notaComida);
-
-
-
 
 
     }
@@ -101,7 +100,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
         duracionS = String.valueOf(duracion);
 
         //Insertamos todos los valores en la base de datos
-        db.insertarMedicacion(nombre, cantidadDiaria, fechaIni, fechaFin, duracionS, hora, cantidadDiaria, forma, notaComida, frecu, usuario);
+        db.insertarMedicacion(nombre, cantidadDiaria, fechaIni, fechaFin, duracionS, frecu, hora1, hora2, hora3, hora4, cantidadDiaria, forma, notaComida, usuario);
         Toast.makeText(ffa, "La medicación ha sido guarda", Toast.LENGTH_SHORT).show();
     }
 
@@ -128,7 +127,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
     }
 
     public void ponerCheck(){
-        if(primerDia.isEmpty()){
+        if(fechaIni.isEmpty()){
             tvTratamiento.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_calendar_month, 0, 0, 0);
         }else{
             tvTratamiento.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_calendar_month, 0, R.drawable.ic_baseline_check, 0);

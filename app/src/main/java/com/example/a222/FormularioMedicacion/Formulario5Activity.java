@@ -19,7 +19,7 @@ public class Formulario5Activity extends AppCompatActivity {
     TextView tvMedicaMasCanti, tvResFrecu;
 
     private final String [] frecuencia = {"Una vez a la semana", "Cada 2 días", "2 días a la semana", "3 días a la semana",
-        "Cada 28 horas", "Según sea necesario"};
+        "Cada 28 horas"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +46,7 @@ public class Formulario5Activity extends AppCompatActivity {
                     break;
                 case "Cada 28 horas":
                     break;
-                case "Según sea necesario":
-                    break;
-
             }
-
         });
 
     }
