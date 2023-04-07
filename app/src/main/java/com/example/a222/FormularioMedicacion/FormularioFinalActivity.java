@@ -29,7 +29,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
     AdminSQLiteOpenHelper db;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-    String nombre, forma, cantidadDiaria, hora1, frecu, notaComida, primerDia, fechaIni, fechaFin, usuario, hora2, hora3, hora4;
+    String nombre, forma, cantidadDiaria, hora1, frecu, notaComida, fechaIni, fechaFin, usuario, hora2, hora3, hora4;
     int duracion;
     String duracionS;
 
@@ -80,7 +80,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
 
         cvCantidadDiaria.setText(cantidadDiaria);
         if(canti >= 2){
-            cvFormato.setText(forma + "s");
+            cvFormato.setText(String.format("%ss", forma));
         }else{
             cvFormato.setText(forma);
         }

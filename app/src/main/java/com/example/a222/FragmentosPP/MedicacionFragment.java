@@ -116,14 +116,21 @@ public class MedicacionFragment extends Fragment {
                 medicacion.setNotaComida((cursor.getString(9)));
             }*/
         }
-
-
+        cursor.close();
     }
 
     public void inicializar(){
         //Nombre toolbar
-        getActivity().setTitle("Medicación");
-        medicaciones = getActivity();
-        context = getContext();
+        if(getActivity() != null){
+            getActivity().setTitle("Medicación");
+            medicaciones = getActivity();
+        }
+
+        if(getContext() != null){
+            context = getContext();
+        }
+
+
+
     }
 }
