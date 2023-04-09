@@ -73,16 +73,16 @@ public class PaginaPrincipal extends AppCompatActivity {
 
 
         //Calendario
-
+/*
         recyclerView = findViewById(R.id.recycler_view);
 
         mAdapter = new CalendarAdapter(calendarList);
 
         recyclerView.setHasFixedSize(true);
 
-
+*/
         // horizontal RecyclerView
-
+/*
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
 
         recyclerView.setLayoutManager(mLayoutManager);
@@ -102,13 +102,13 @@ public class PaginaPrincipal extends AppCompatActivity {
                         for (int i = 0; i < totalItemCount; i++){
                             View childView = recyclerView.getChildAt(i);
                             TextView childTextView = (TextView) (childView.findViewById(R.id.day_1));
-                            String childTextViewText = (String) (childTextView.getText());
+                            String childTextViewText = (String) (childTextView.getText());*/
 /*Este codigo cambia el dia de domingo a rojo pero no lo necesitamos
                             if (childTextViewText.equals("Sun"))
                                 childTextView.setTextColor(Color.RED);
                             else
                                 childTextView.setTextColor(Color.BLACK);*/
-                        }
+                       /* }
                     }
                 });
         recyclerView.setAdapter(mAdapter);
@@ -178,6 +178,8 @@ public class PaginaPrincipal extends AppCompatActivity {
             calendarList.add(calendar);
         }
         mAdapter.notifyDataSetChanged();
+        */
+
     }
 
     //Reemplazar fragmentos
