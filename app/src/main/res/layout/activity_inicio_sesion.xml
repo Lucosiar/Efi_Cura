@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:background="@color/fondoAzul"
-    tools:context=".Registro_Login.InicioSesion"
-
-    >
+    android:theme="@style/Theme.MiLogin.NoActionBar"
+    tools:context=".Registro_Login.InicioSesion">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

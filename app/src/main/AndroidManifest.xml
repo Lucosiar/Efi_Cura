@@ -11,13 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiLogin"
         tools:targetApi="31">
-        <activity
-            android:name=".MedicacionActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <!-- MAIN inicio sesion -->
         <activity
             android:name=".Registro_Login.InicioSesion"
@@ -47,6 +41,21 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity> <!-- CITA/MEDICO ACTIVITY // Añadir citas y medicos -->
+        <activity
+            android:name=".FormularioCita_Medico.MedicacionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".FormularioCita_Medico.EditarMedicacionActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".FormularioCita_Medico.CitaActivity"
             android:exported="false">

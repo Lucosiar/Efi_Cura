@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,10 +15,18 @@ import java.util.List;
 
 public class AdaptadorMedicacion extends RecyclerView.Adapter<AdaptadorMedicacion.MedicacionViewHolder> {
     private final List<Medicacion> medicacionList;
+    private Context context;
+    private OnItemClickListener listener;
 
-    public AdaptadorMedicacion(Context mCtx, List<Medicacion>medicacionList) {
+    public interface OnItemClickListener{
+        void onItemClick(Medicacion medicacion);
+    }
+
+    public AdaptadorMedicacion(Context context, List<Medicacion>medicacionList, OnItemClickListener listener) {
         //Adaptador para el recycler view de las medicacion
         this.medicacionList = medicacionList;
+        this.context = context;
+        this.listener = listener;
     }
 
     @Override
@@ -36,6 +45,12 @@ public class AdaptadorMedicacion extends RecyclerView.Adapter<AdaptadorMedicacio
         holder.formatoMedicacion.setText(medicacion.getFormato());
         holder.horaMedicacion.setText(medicacion.getToma1());
         holder.instruccionMedicacion.setText(medicacion.getNotaComida());
+
+        holder.itemView.setOnClickListener(v -> {
+            if(listener != null){
+                listener.onItemClick(medicacion);
+            }
+        });
     }
 
     @Override

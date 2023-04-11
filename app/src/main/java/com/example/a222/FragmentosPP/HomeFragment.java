@@ -1,6 +1,5 @@
 package com.example.a222.FragmentosPP;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -31,57 +30,34 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private final List<MyCalendar> calendarList= new ArrayList<>();
-    private RecyclerView recyclerView;
     private CalendarAdapter mAdapter;
-    TextView tvHora1Toma;
+    TextView tvHora1Toma, tvHora2Toma, tvHora3Toma, tvHora4Toma;
 
-    @SuppressLint("MissingInflatedId")
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             Bundle savedInstanceState){
 
-        getActivity().setTitle("Inicio");
-        View layout = inflater.inflate(R.layout.fragment_homee, container, false);
-       // layout.findViewById(R.id.imagenView).setBackgroundResource(getArguments().getInt(ARG_ICON));
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+
+        View view = inflater.inflate(R.layout.fragment_homee, container, false);
+
+        if (getActivity() != null) {getActivity().setTitle("Inicio");}
+
+        tvHora4Toma = view.findViewById(R.id.tvHora4Toma);
+        tvHora3Toma = view.findViewById(R.id.tvHora3Toma);
+        tvHora2Toma = view.findViewById(R.id.tvHora2Toma);
+        tvHora1Toma = view.findViewById(R.id.tvHora1Toma);
+
 
         //Calendario
-        recyclerView = layout.findViewById(R.id.recycler_view);
-
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         mAdapter = new CalendarAdapter(calendarList);
-
         recyclerView.setHasFixedSize(true);
-
 
         // horizontal RecyclerView
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-
         recyclerView.setLayoutManager(mLayoutManager);
 
-
-        recyclerView.addItemDecoration(new DividerItemDecoration(layout.getContext(), LinearLayoutManager.HORIZONTAL));
-
+        recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.HORIZONTAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        recyclerView
-                .addOnScrollListener(new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrolled(RecyclerView recyclerView,
-                                           int dx, int dy) {
-                        super.onScrolled(recyclerView, dx, dy);
-                        int totalItemCount = mLayoutManager.getChildCount();
-                        for (int i = 0; i < totalItemCount; i++){
-                            View childView = recyclerView.getChildAt(i);
-                            TextView childTextView = (TextView) (childView.findViewById(R.id.day_1));
-                            String childTextViewText = (String) (childTextView.getText());
-/*Este codigo cambia el dia de domingo a rojo pero no lo necesitamos
-                            if (childTextViewText.equals("Sun"))
-                                childTextView.setTextColor(Color.RED);
-                            else
-                                childTextView.setTextColor(Color.BLACK);*/
-                        }
-                    }
-                });
         recyclerView.setAdapter(mAdapter);
-
 
         // row click listener
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
@@ -93,7 +69,7 @@ public class HomeFragment extends Fragment {
                 Animation startRotateAnimation = AnimationUtils.makeInChildBottomAnimation(getContext());
                 childTextView.startAnimation(startRotateAnimation);
                 childTextView.setTextColor(Color.CYAN);
-                Toast.makeText(getContext(), calendar.getDay() +"/" + calendar.getMonth() + "", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), calendar.getDate()+"/" + calendar.getDay()+"/" +calendar.getMonth()+"", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -110,27 +86,13 @@ public class HomeFragment extends Fragment {
         }));
 
         prepareCalendarData();
-        return layout;
+        return view;
     }
 
-    //Calendario
-    private int getCurrentItem(){
-        return ((LinearLayoutManager)recyclerView.getLayoutManager())
-                .findLastCompletelyVisibleItemPosition();
-    }
-
-    private void setCurrentItem(int position, int incr){
-        position=position+incr;
-
-        if (position <0)
-            position=0;
-
-        recyclerView.smoothScrollToPosition(position);
-    }
 
     private void prepareCalendarData() {
         Calendar today = Calendar.getInstance();
-        myCalendarData m_calendar = new myCalendarData(-2);
+        myCalendarData m_calendar = new myCalendarData(-1);
 
         for (int i = 0; i < 30; i++) {
 
@@ -139,7 +101,7 @@ public class HomeFragment extends Fragment {
                     String.valueOf(m_calendar.getMonth()),
                     String.valueOf(m_calendar.getYear()), i);
 
-            if(m_calendar.getDay() == today.get(Calendar.DAY_OF_MONTH)
+           if(m_calendar.getDay() == today.get(Calendar.DAY_OF_MONTH)
                     && m_calendar.getMonth() == today.get(Calendar.MONTH)){
                 calendar.setTextColor(Color.WHITE);
             }
@@ -147,11 +109,9 @@ public class HomeFragment extends Fragment {
             m_calendar.getNextWeekDay(1);
             calendarList.add(calendar);
         }
-        mAdapter.notifyDataSetChanged();
+        int size = calendarList.size();
+        mAdapter.notifyItemRangeChanged(size - 30, size);
     }
-
-
-
 
 }
 

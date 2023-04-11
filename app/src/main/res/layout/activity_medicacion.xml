@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondoAzul"
+    tools:context=".FormularioCita_Medico.MedicacionActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
+            android:layout_marginTop="5sp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/ibAtrass"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="10sp"
+                android:background="@android:color/transparent"
+                android:contentDescription="icono de atras"
+                app:srcCompat="@drawable/ic_baseline_arrow_back" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="282dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/fondoAzul" />
+
+            <ImageButton
+                android:id="@+id/ibBorrar"
+                android:layout_width="121dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10sp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:contentDescription="icono de borrar"
+                app:srcCompat="@drawable/ic_baseline_delete" />
+
+            <ImageButton
+                android:id="@+id/ibEditar"
+                android:layout_width="129dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10sp"
+                android:layout_marginEnd="10sp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:contentDescription="icono de editar"
+                app:srcCompat="@drawable/ic_baseline_edit" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvMedicamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_marginTop="7sp"
+            android:layout_marginEnd="15sp"
+            android:text="Singulair"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_marginTop="15sp"
+            android:layout_marginEnd="10sp"
+            android:text="Tomado por última vez:"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvUltimaToma"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginEnd="10sp"
+            android:text="Ayer, 9 abr, 20:30"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
+                android:layout_marginTop="5sp"
+                android:layout_marginEnd="10sp"
+                android:text="Recargas:"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/botonRecarga"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="20sp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:text="Recarga"
+                app:cornerRadius="130dp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvRecargaRecord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginEnd="10sp"
+            android:text="Sin recordatorio de recargas"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="10sp"
+            android:text="Instrucciones sobre los alimentos"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvInstruccionComida"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginEnd="10sp"
+            android:text="No importa"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

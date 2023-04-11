@@ -22,9 +22,6 @@ public class CompartirActivity extends AppCompatActivity {
         setContentView(R.layout.activity_compartir);
 
         inicializar();
-
-
-
     }
 
 

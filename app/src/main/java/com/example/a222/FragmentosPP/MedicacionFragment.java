@@ -1,5 +1,6 @@
 package com.example.a222.FragmentosPP;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a222.Adaptadores.AdaptadorMedicacion;
 import com.example.a222.AdminSQLiteOpenHelper;
 import com.example.a222.ClasesGetSet.Medicacion;
+import com.example.a222.FormularioCita_Medico.MedicacionActivity;
 import com.example.a222.FormularioMedicacion.Formulario1Activity;
 import com.example.a222.R;
 
@@ -39,10 +42,9 @@ public class MedicacionFragment extends Fragment {
     int cantidad;
     String formato;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         inicializar();
 
         //Container del fragmento
@@ -65,12 +67,12 @@ public class MedicacionFragment extends Fragment {
 
         consultarMedicacion();
 
-        AdaptadorMedicacion adaptadorMedicacion = new AdaptadorMedicacion(context, medicacionList);
+        AdaptadorMedicacion adaptadorMedicacion = new AdaptadorMedicacion(context, medicacionList, medicacion -> {
+            Intent intent = new Intent(getActivity(), MedicacionActivity.class);
+            intent.putExtra("nombre",  medicacion.getNombre());
+            startActivity(intent);
+        });
         recyclerView.setAdapter(adaptadorMedicacion);
-
-        if(medicacionList.size() == 0) {
-            Toast.makeText(medicaciones, "Lista vacia", Toast.LENGTH_SHORT).show();
-        }
 
         return view;
     }
@@ -119,8 +121,6 @@ public class MedicacionFragment extends Fragment {
         if(getContext() != null){
             context = getContext();
         }
-
-
-
     }
+
 }
