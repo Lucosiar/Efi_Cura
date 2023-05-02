@@ -23,20 +23,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15sp"
+                android:text="Medicacion"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/tvPreguntaHora"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10sp"
-                android:layout_marginTop="10sp"
-                android:layout_marginEnd="10sp"
-                android:text="¿Cuándo debe tomar la dosis?"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvCantidadHora"
@@ -49,13 +39,24 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
+            <TextView
+                android:id="@+id/tvPreguntaHora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginEnd="10sp"
+                android:text="¿Cuándo debe tomar la dosis?"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="71dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvMostrarDiaComienzo"
+                    android:id="@+id/tvHora1"
                     android:layout_width="125dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -68,7 +69,7 @@
                     android:textSize="24sp" />
 
                 <Button
-                    android:id="@+id/selDiaComienzo"
+                    android:id="@+id/selHora1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -76,6 +77,133 @@
                     android:backgroundTint="@color/white"
                     android:text="Seleccione hora"
                     app:cornerRadius="130dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvPregunta2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="15sp"
+                android:layout_marginEnd="10sp"
+                android:text="¿Cuando debe tomar la segunda dosis?"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/tomas2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvHora2"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="50sp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginEnd="15sp"
+                    android:text="Hora"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/selHora2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10sp"
+                    android:backgroundTint="@color/white"
+                    android:text="Seleccione hora"
+                    app:cornerRadius="130dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvPregunta3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="15sp"
+                android:layout_marginEnd="10sp"
+                android:layout_weight="1"
+                android:text="¿Cuando debe tomar la tercera dosis?"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/tomas3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvHora3"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="50sp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginEnd="15sp"
+                    android:text="Hora"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/selHora3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10sp"
+                    android:backgroundTint="@color/white"
+                    android:text="Seleccione hora"
+                    app:cornerRadius="130dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvPregunta4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="15sp"
+                android:layout_marginEnd="10sp"
+                android:text="¿Cuando debe tomar la cuarta dosis?"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/tomas4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvHora4"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="50sp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginEnd="15sp"
+                    android:text="Hora"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/selHora4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10sp"
+                    android:backgroundTint="@color/white"
+                    android:text="Seleccione hora"
+                    app:cornerRadius="130dp" />
+
             </LinearLayout>
 
             <Button

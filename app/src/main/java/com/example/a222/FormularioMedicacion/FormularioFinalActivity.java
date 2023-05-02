@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
     CardView idCardView;
     TextView cvNombre, cvCantidadDiaria, cvFormato, cvFrecuencia, cvHora, cvCuando;
     Activity ffa;
-    Button botonFinalizar;
+    Button botonFinalizar, bCancelar;
     AdminSQLiteOpenHelper db;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -49,6 +50,11 @@ public class FormularioFinalActivity extends AppCompatActivity {
 
             Intent as = new Intent(ffa, PaginaPrincipal.class);
             startActivity(as);
+        });
+
+        bCancelar.setOnClickListener(v -> {
+            Intent volver = new Intent(ffa, PaginaPrincipal.class);
+            startActivity(volver);
         });
 
     }
@@ -177,6 +183,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
         cvCuando = idCardView.findViewById(R.id.cvCuando);
 
         botonFinalizar = findViewById(R.id.botonFinalizar);
+        bCancelar = findViewById(R.id.bCancelar);
         ffa = this;
         db = new AdminSQLiteOpenHelper(ffa);
     }

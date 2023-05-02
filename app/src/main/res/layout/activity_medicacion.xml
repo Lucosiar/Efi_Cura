@@ -106,22 +106,24 @@
                 android:layout_marginEnd="10sp"
                 android:text="Recargas:"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="TextContrastCheck" />
 
             <Button
                 android:id="@+id/botonRecarga"
-                android:layout_width="140dp"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="20sp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/white"
+                android:background="@color/white"
                 android:text="Recarga"
+                android:textColor="@color/fondoAzul"
                 app:cornerRadius="130dp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvRecargaRecord"
+            android:id="@+id/tvRecargaRecordatorio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15sp"

@@ -29,8 +29,12 @@ public class MedicoActivity extends AppCompatActivity {
     Button button3;
     Activity esta;
 
+    public boolean actualizarSpinnerBoolean = false;
+
     String usu;
     SharedPreferences preferences;
+
+    CitaActivity citas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,7 @@ public class MedicoActivity extends AppCompatActivity {
 
                 db.insertarDatosVoid(nombre, especialidad, hospital, numero, correo, usuario);
                 Toast.makeText(MedicoActivity.this, "Registro completo", Toast.LENGTH_SHORT).show();
+                actualizarSpinnerBoolean = true;
                 MedicoActivity.super.onBackPressed();
             }
         });

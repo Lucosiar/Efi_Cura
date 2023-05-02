@@ -181,16 +181,6 @@
                 app:cornerRadius="130dp"
                 tools:ignore="TextSizeCheck,TextContrastCheck" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:onClick="probar"
-                android:text="Probar"
-                android:textColor="@color/black"
-                tools:ignore="TextSizeCheck" />
-
         </LinearLayout>
     </ScrollView>
 

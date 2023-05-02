@@ -16,6 +16,136 @@
             android:id="@+id/textView32"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Apartado para editar la medicacion" />
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginEnd="20sp"
+            android:text="Editar la medicación"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginEnd="20sp"
+            android:text="Nombre:"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/etNombreMedicamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginEnd="20sp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="Name"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tvInstrucciones"
+            android:layout_width="379dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="5sp"
+            android:drawablePadding="10dp"
+            android:text="Añadir instrucciones a la toma"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:drawableLeftCompat="@drawable/ic_baseline_info_24" />
+
+        <TextView
+            android:id="@+id/tvTratamiento"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="5sp"
+            android:drawablePadding="10dp"
+            android:text="Establecer duración"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:drawableLeftCompat="@drawable/ic_baseline_calendar_month" />
+
+        <TextView
+            android:id="@+id/tvRecarga"
+            android:layout_width="344dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="5sp"
+            android:drawablePadding="10dp"
+            android:text="Añadir recargas"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:drawableLeftCompat="@drawable/ic_baseline_notification_important_24" />
+
+        <TextView
+            android:id="@+id/nofjw"
+            android:layout_width="344dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="5sp"
+            android:drawablePadding="10dp"
+            android:text="Notificaciones"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:drawableLeftCompat="@drawable/ic_baseline_notification_important_24" />
+
+        <Switch
+            android:id="@+id/sTomas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginEnd="20sp"
+            android:contentDescription="Switch notificaciones"
+            android:minHeight="48dp"
+            android:text="Notificaciones de toma"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <Switch
+            android:id="@+id/sRecarga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="20sp"
+            android:minHeight="48dp"
+            android:text="Notificaciones de recarga"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <Button
+            android:id="@+id/bAceptarEdiccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40sp"
+            android:layout_marginTop="40sp"
+            android:layout_marginEnd="40sp"
+            android:backgroundTint="@color/white"
+            android:text="Guardar"
+            app:cornerRadius="130dp" />
+
+        <Button
+            android:id="@+id/bCancelarEdiccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginEnd="60sp"
+            android:backgroundTint="@color/white"
+            android:text="Cancelar"
+            app:cornerRadius="130dp" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

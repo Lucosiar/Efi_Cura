@@ -24,7 +24,7 @@ public class InicioSesion extends AppCompatActivity {
     Button inicio, registro;
     AdminSQLiteOpenHelper db;
     CheckBox cbIniSesion;
-Context context;
+    Context context;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
@@ -36,13 +36,13 @@ Context context;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio_sesion);
 
-        //Lo inicializamos todo
         inicializar();
 
         if (revisarSesion()){
             //Cambiar de intent
             Intent i = new Intent(getApplicationContext(), PaginaPrincipal.class);
             startActivity(i);
+            finishAffinity();
             Toast.makeText(this, "Sesion iniciada", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this, "Debe iniciar sesion", Toast.LENGTH_SHORT).show();
@@ -81,6 +81,7 @@ Context context;
                 guardarSesion(cbIniSesion.isChecked());
                 Intent i = new Intent(getApplicationContext(), PaginaPrincipal.class);
                 startActivity(i);
+                finishAffinity();
             }else{
                 Toast.makeText(InicioSesion.this, "Login erroneo", Toast.LENGTH_SHORT).show();
             }

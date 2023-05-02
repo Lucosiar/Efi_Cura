@@ -2,12 +2,16 @@ package com.example.a222.Registro_Login;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.a222.AdminSQLiteOpenHelper;
 import com.example.a222.FormularioMedicacion.Formulario1Activity;
@@ -20,7 +24,11 @@ public class Registro extends AppCompatActivity {
     TextView usuario, contrasena, correo, repetir, cumple;
     AdminSQLiteOpenHelper db;
 
-    Activity registro;
+    Activity activity_registro;
+    Context context;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+    String llave = "sesion";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +39,7 @@ public class Registro extends AppCompatActivity {
 
     }
 
+    //DatePicker / escoger cumpleaños
     public void escogerCumple(View view){
         final Calendar c = Calendar.getInstance();
         //Fecha establecida para que salga como predeterminada en el calendario
@@ -40,7 +49,7 @@ public class Registro extends AppCompatActivity {
         int mes = c.get(Calendar.MONTH);
         int ano = c.get(Calendar.YEAR);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(registro, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(activity_registro, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 cumple.setText(dayOfMonth + "/" + (month+1) + "/" + year);
@@ -52,7 +61,8 @@ public class Registro extends AppCompatActivity {
         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
         datePickerDialog.show();
     }
-    //Boton retroceso
+
+    //Boton retroceso a la pantalla inicio sesion
     public void volver(View view) {
         Intent i = new Intent(this, InicioSesion.class);
         startActivity(i);
@@ -75,6 +85,7 @@ public class Registro extends AppCompatActivity {
                 if(!check){
                     boolean insert = db.insertarDatos(usu, con, corr, fech);
                     if(insert){
+                        guardarSesion(true);
                         Toast.makeText(Registro.this, "Registro completo", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(this, Formulario1Activity.class);
                         startActivity(i);
@@ -90,16 +101,17 @@ public class Registro extends AppCompatActivity {
         }
     }
 
-    public void probar(View view){
-        Intent o = new Intent(this, Formulario1Activity.class);
-        startActivity(o);
+    public void guardarSesion(boolean checked){
+        editor.putBoolean(llave, checked);
+
+        editor.putString("nombre", usuario.getText().toString());
+        editor.putString("contra", contrasena.getText().toString());
+
+        editor.apply();
     }
 
-
-
-
     //validacion de si estan vacios los campos, con warnings
-    public boolean validar(){
+    private boolean validar(){
         boolean ret = true;
         String errorUsuario = usuario.getText().toString();
         String errorContra = contrasena.getText().toString();
@@ -138,6 +150,11 @@ public class Registro extends AppCompatActivity {
         repetir = findViewById(R.id.idRepetir);
         cumple = findViewById(R.id.idFechaNac);
         db = new AdminSQLiteOpenHelper(this);
-        registro = this;
+        activity_registro = this;
+        context = this;
+
+        preferences = getSharedPreferences("usuarios", Context.MODE_PRIVATE);
+        editor = preferences.edit();
+
     }
 }

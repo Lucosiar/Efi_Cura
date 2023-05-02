@@ -78,6 +78,20 @@ public class CitasFragment extends Fragment{
         return view;
     }
 
+    /*// Obtener las citas médicas del usuario
+List<CitaMedica> citas = obtenerCitasMedicasDeUsuario();
+
+// Crear objeto de calendario y restar un día
+Calendar calendario = Calendar.getInstance();
+calendario.setTime(citaMedica.getFecha());
+calendario.add(Calendar.DAY_OF_MONTH, -1);
+
+// Crear objeto de alarma
+AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+Intent intent = new Intent(this, NotificacionCitaMedicaReceiver.class);
+PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+alarmManager.set(AlarmManager.RTC_WAKEUP, calendario.getTimeInMillis(), pendingIntent);*/
+
     private void inicializar(){
         //Nombre de la toolbar
         getActivity().setTitle("Citas");

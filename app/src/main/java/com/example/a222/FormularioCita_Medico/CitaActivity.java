@@ -3,8 +3,10 @@ package com.example.a222.FormularioCita_Medico;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.a222.AdminSQLiteOpenHelper;
 import com.example.a222.ClasesGetSet.Medico;
@@ -29,23 +32,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class CitaActivity extends AppCompatActivity {
-
-
     //Activity para añadir y crear una cita nueva
     Button botonAnadirMedico, bDia, bHora, botonAnadirCita2;
-
     Spinner spinnerMedicos;
     ArrayList<String>listaMedicos;
     ArrayList<Medico>MedicoLista;
     AdminSQLiteOpenHelper db;
     Activity citas;
-
     String usu;
     String usuario;
+    Context context;
     SharedPreferences preferences;
-
     TextView tvDia, tvHora, tvMedico;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +58,7 @@ public class CitaActivity extends AppCompatActivity {
             Intent i = new Intent(citas, MedicoActivity.class);
             startActivity(i);
         });
+
         //Metodo para consultar los medicos en la bd
         consultarMedicos();
 
@@ -152,7 +151,7 @@ public class CitaActivity extends AppCompatActivity {
             c.set(ano, mes, dia);
 
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(citas, (view1, year, month, dayOfMonth) -> 
+            DatePickerDialog datePickerDialog = new DatePickerDialog(citas, (view1, year, month, dayOfMonth) ->
                 tvDia.setText(dayOfMonth + "/" + (month + 1) + "/" + year), dia, mes, ano);
             //Seleccionamos la fecha actual del dispositivo
             datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
@@ -187,7 +186,7 @@ public class CitaActivity extends AppCompatActivity {
     }
 
     //validacion de los campos incompletos
-    public boolean validar(){
+    private boolean validar(){
         boolean ret = true;
         String errorDia = tvDia.getText().toString();
         String errorHora = tvHora.getText().toString();
@@ -208,12 +207,13 @@ public class CitaActivity extends AppCompatActivity {
         return ret;
     }
 
-    public void inicializar(){
+    private void inicializar(){
         //Activity bar
         this.setTitle("Añadir Cita");
 
         //Activity
         citas = this;
+        context = this;
 
         //Base de datos
         db = new AdminSQLiteOpenHelper(citas);

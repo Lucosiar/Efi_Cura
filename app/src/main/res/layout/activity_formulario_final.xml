@@ -163,14 +163,24 @@
 
         <Button
             android:id="@+id/botonFinalizar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200sp"
+            android:layout_height="50sp"
             android:layout_gravity="center"
             android:layout_marginTop="200sp"
             android:backgroundTint="@color/white"
             android:text="Finalizar"
             android:textColor="@color/fondoAzul"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/bCancelar"
+            android:layout_width="162dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10sp"
+            android:backgroundTint="@color/white"
+            android:text="Cancelar"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
