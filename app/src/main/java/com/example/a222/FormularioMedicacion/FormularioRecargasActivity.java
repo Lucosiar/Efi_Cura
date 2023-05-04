@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,6 +27,9 @@ public class FormularioRecargasActivity extends AppCompatActivity {
     TextView tvCuantasQuedan, tvNomMedicamento;
     Button bAcep, bCancel;
     EditText etCantidad;
+
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     AdminSQLiteOpenHelper dbHelper;
     SQLiteDatabase db;
@@ -62,11 +66,17 @@ public class FormularioRecargasActivity extends AppCompatActivity {
             dbHelper = new AdminSQLiteOpenHelper(this);
             db = dbHelper.getReadableDatabase();
             cursor = db.rawQuery("Select * from medicacion where nombre = ?", new String[]{medicina});
-            if(cursor != null && cursor.moveToFirst()){
+
+            if(cursor != null && cursor.moveToFirst()) {
                 cantidadActual = cursor.getString(10);
-                cantidadEnte  = parseInt(cantidadActual);
+                cantidadEnte = parseInt(cantidadActual);
                 mostrarCantidadActual = "Te quedan " + cantidadActual + " pastillas";
                 tvCuantasQuedan.setText(mostrarCantidadActual);
+            }else{
+                preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
+                editor = preferences.edit();
+                editor.putString("cantidadTotal", cantidadActual);
+                editor.commit();
             }
         }catch(SQLException e){
             Log.e(":::ERROR:TAG", "Error al abrir la base o sacar datos", e);
@@ -79,7 +89,7 @@ public class FormularioRecargasActivity extends AppCompatActivity {
         bAcep.setOnClickListener(v -> {
             AlertDialog.Builder builder =  new AlertDialog.Builder(this);
             builder.setTitle("Cantidad Pastillas");
-            String preguntaNull = "¿Desea agregar la medicación? Ahora mismo tiene 0 guardadas.";
+            String preguntaNull = "¿Desea agregar la medicación? Ahora mismo no tiene ninguna.";
             String pregunta = "¿Desea agregar estas pastillas a las " + cantidadActual + " que le quedan?";
             //Si la cantidad es nula se muestra un mensaje o otro
             if(cantidadActual == null){
@@ -111,6 +121,9 @@ public class FormularioRecargasActivity extends AppCompatActivity {
         });
     }
 
+    public void sacarMedicacion(){
+
+    }
     //Sacar la cantidad de pastillas que hay para luego antes de actualizar la cantidad
     //que salga un dialogo en el que puedas decidir si sumar la medicacion a la que ya tenias
     //O si ese num es tu medicacion final

@@ -20,6 +20,16 @@ public class Formulario3Activity extends AppCompatActivity {
     private final String [] opciones = {"Si", "No", "Cuando sea necesario"};
     Activity siguiente;
 
+    String gotasPlural = "Gota(s)";
+    String comprimidoPlural = "Comprimido(s)";
+    String cucharaPlural = "Cuchara(s)";
+    String gramoPlural = "Gramo(s)";
+    String inhalacionPlural = "Inhalacion(es)";
+    String parchePlural = "Parche(s)";
+    String sobrePlural = "Sobre(s)";
+    String unidadPlural = "Unidad(es)";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +43,15 @@ public class Formulario3Activity extends AppCompatActivity {
 
         //Lista de opciones
         list = findViewById(R.id.list1);
-        ArrayAdapter<String>adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, opciones);
+        ArrayAdapter<String>adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, opciones);
         list.setAdapter(adapter);
 
 
         list.setOnItemClickListener((adapterView, view, i, l) -> {
             //Guardo la respuesta del list view
             //Si el usu le da a el si, se guarda un String = "Si" en el tvRespuesta
-            tvRespuesta.setText("" + list.getItemAtPosition(i));
+            String texto = "" + list.getItemAtPosition(i);
+            tvRespuesta.setText(texto);
 
             if(!validar()){
                 Toast.makeText(Formulario3Activity.this, "Complete el campo.", Toast.LENGTH_SHORT).show();
@@ -49,7 +60,7 @@ public class Formulario3Activity extends AppCompatActivity {
                 SharedPreferences preferences = getSharedPreferences("datos", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("cantidadDiaria", tvCantidad.getText().toString());
-                editor.commit();
+                editor.apply();
 
                 switch ((tvRespuesta.getText().toString())) {
                     case "Si":
@@ -62,7 +73,7 @@ public class Formulario3Activity extends AppCompatActivity {
                         break;
                     case "Cuando sea necesario":
                         editor.putString("frecu", "Cuando lo necesite");
-                        editor.commit();
+                        editor.apply();
                         Intent ff = new Intent(siguiente, FormularioFinalActivity.class);
                         startActivity(ff);
                         break;
@@ -81,28 +92,28 @@ public class Formulario3Activity extends AppCompatActivity {
 
         switch(tvFormato.getText().toString()){
             case "Gota":
-                tvMostrar.setText("Gota(s)");
+                tvMostrar.setText(gotasPlural);
                 break;
             case "Comprimido":
-                tvMostrar.setText("Comprimido(s)");
+                tvMostrar.setText(comprimidoPlural);
                 break;
             case "Cuchara":
-                tvMostrar.setText("Cuchara(s)");
+                tvMostrar.setText(cucharaPlural);
                 break;
             case "Gramo":
-                tvMostrar.setText("Gramo(s)");
+                tvMostrar.setText(gramoPlural);
                 break;
             case "Inhalacion":
-                tvMostrar.setText("Inhalacion(es)");
+                tvMostrar.setText(inhalacionPlural);
                 break;
             case "Parche":
-                tvMostrar.setText("Parche(s)");
+                tvMostrar.setText(parchePlural);
                 break;
             case "Sobre":
-                tvMostrar.setText("Sobre(s)");
+                tvMostrar.setText(sobrePlural);
                 break;
             case "Unidad":
-                tvMostrar.setText("Unidad(es)");
+                tvMostrar.setText(unidadPlural);
                 break;
         }
     }
@@ -125,6 +136,7 @@ public class Formulario3Activity extends AppCompatActivity {
         tvCantidad = findViewById(R.id.tvCantidad);
         tvRespuesta = findViewById(R.id.tvRespuesta);
         siguiente = this;
+
     }
 
     @Override

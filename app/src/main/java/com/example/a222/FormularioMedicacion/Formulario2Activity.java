@@ -40,24 +40,22 @@ public class Formulario2Activity extends AppCompatActivity {
         medicacion.setText(nombre);
 
         list = findViewById(R.id.list1);
-        ArrayAdapter<String>adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, formatos);
+        ArrayAdapter<String>adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, formatos);
         list.setAdapter(adapter);
 
         x=this;
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView adapterView, View view, int i, long l) {
+        list.setOnItemClickListener((adapterView, view, i, l) -> {
 
-                tvForma.setText("" + list.getItemAtPosition(i));
+            String texto = "" + list.getItemAtPosition(i);
+            tvForma.setText(texto);
 
-                SharedPreferences s = getSharedPreferences("datos", Context.MODE_PRIVATE);
-                SharedPreferences.Editor ed = s.edit();
-                ed.putString("forma", tvForma.getText().toString());
-                ed.commit();
+            SharedPreferences s1 = getSharedPreferences("datos", Context.MODE_PRIVATE);
+            SharedPreferences.Editor ed = s1.edit();
+            ed.putString("forma", tvForma.getText().toString());
+            ed.apply();
 
-                Intent v = new Intent(x, Formulario3Activity.class);
-                startActivity(v);
-            }
+            Intent v = new Intent(x, Formulario3Activity.class);
+            startActivity(v);
         });
     }
 

@@ -37,22 +37,23 @@ public class Formulario4Activity extends AppCompatActivity {
         String formato = s.getString("forma", "");
         String cantidad = s.getString("cantidadDiaria", "");
 
+        String mostrarSingular = nombre + ", " + cantidad + " " + formato + "s";
+        String mostrarPlural = mostrarSingular + "s";
         //Mostrar por pantalla medicacion, cantidad y formato
         int canInt = Integer.parseInt(cantidad);
         if(canInt >= 2){
-            tvMedicaMasCanti.setText(nombre + ", " + cantidad + " " + formato + "s");
+            tvMedicaMasCanti.setText(mostrarPlural);
         }else {
-            tvMedicaMasCanti.setText(nombre + ", " + cantidad + " " + formato);
+            tvMedicaMasCanti.setText(mostrarSingular);
         }
-
-
 
         ArrayAdapter<String>adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, frecuencia);
         listFrecuencia.setAdapter(adapter);
 
         listFrecuencia.setOnItemClickListener((adapterView, view, i, l) -> {
+            String mostrar = "" + listFrecuencia.getItemAtPosition(i);
             //Guardo la frecuencia con la que toma el medicamento en una varible
-            tvResFrecu.setText("" + listFrecuencia.getItemAtPosition(i));
+            tvResFrecu.setText(mostrar);
 
             switch (tvResFrecu.getText().toString()){
                 case "Una vez al día":
@@ -60,9 +61,7 @@ public class Formulario4Activity extends AppCompatActivity {
                     editor = s.edit();
                     editor.putString("frecu", "Una vez al día");
                     editor.commit();
-
-                    Intent a = new Intent(f4a, FormularioHora.class);
-                    startActivity(a);
+                    cambiarPantalla();
                     break;
 
                 case "Dos veces al día": //Cada 12 horas
@@ -70,7 +69,7 @@ public class Formulario4Activity extends AppCompatActivity {
                     editor = s.edit();
                     editor.putString("frecu", "Dos veces al día");
                     editor.commit();
-
+                    cambiarPantalla();
                     break;
 
                 case "Tres veces al día": //Cada 8 horas
@@ -78,6 +77,7 @@ public class Formulario4Activity extends AppCompatActivity {
                     editor = s.edit();
                     editor.putString("frecu", "Tres veces al día");
                     editor.commit();
+                    cambiarPantalla();
                     break;
 
                 case "Cuatro veces al día": //4 veces al día es lo mismo que cada 6 horas
@@ -85,11 +85,17 @@ public class Formulario4Activity extends AppCompatActivity {
                     editor = s.edit();
                     editor.putString("frecu", "Cuatro veces al día");
                     editor.commit();
+                    cambiarPantalla();
                     break;
             }
         });
     }
 
+    private void cambiarPantalla(){
+        Intent a = new Intent(f4a, FormularioHora.class);
+        startActivity(a);
+        finish();
+    }
     //Cambiar cuando terminee
     public void inicializarVariables(){
         tvPregunta = findViewById(R.id.tvPregunta);

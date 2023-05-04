@@ -37,12 +37,12 @@ public class FormularioActivityComida extends AppCompatActivity {
 
         //on click
         listComida.setOnItemClickListener((adapterView, view, i, l) -> {
-
-            tvRespuestaComida.setText("" + listComida.getItemAtPosition(i));
+            String mostrar = "" + listComida.getItemAtPosition(i);
+            tvRespuestaComida.setText(mostrar);
             String respuesta = tvRespuestaComida.getText().toString();
 
             editor.putString("notaComida", respuesta);
-            editor.commit();
+            editor.apply();
 
             switch (respuesta){
                 case "Antes de comer":  case "Despues de comer": case "No importa": case "A la hora de comer":

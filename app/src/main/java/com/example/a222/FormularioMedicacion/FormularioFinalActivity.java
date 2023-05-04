@@ -30,7 +30,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
     AdminSQLiteOpenHelper db;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-    String nombre, forma, cantidadDiaria, hora1, frecu, notaComida, fechaIni, fechaFin, usuario, hora2, hora3, hora4;
+    String nombre, forma, cantidadDiaria, hora1, frecu, notaComida, fechaIni, fechaFin, usuario, hora2, hora3, hora4, cantidadTotal;
     int duracion;
     String duracionS;
 
@@ -106,13 +106,13 @@ public class FormularioFinalActivity extends AppCompatActivity {
         duracionS = String.valueOf(duracion);
 
         //Insertamos todos los valores en la base de datos
-        db.insertarMedicacion(nombre, cantidadDiaria, fechaIni, fechaFin, duracionS, frecu, hora1, hora2, hora3, hora4, cantidadDiaria, forma, notaComida, usuario);
+        db.insertarMedicacion(nombre, cantidadDiaria, fechaIni, fechaFin, duracionS, frecu, hora1, hora2, hora3, hora4, cantidadTotal, forma, notaComida, usuario);
         Toast.makeText(ffa, "La medicación ha sido guarda", Toast.LENGTH_SHORT).show();
     }
 
 
 
-    public void borrarSP(){
+    private void borrarSP(){
         preferences = getSharedPreferences("datos", MODE_PRIVATE);
         editor = preferences.edit();
         editor.clear();

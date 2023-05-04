@@ -41,8 +41,8 @@ public class Formulario1Activity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
         Editor editor = preferences.edit();
         editor.putString("nombre", medicacion.getText().toString());
-        editor.commit();
-        if (validar() == false) {
+        editor.apply();
+        if (!validar()) {
             Toast.makeText(Formulario1Activity.this, "Escriba un medicamento", Toast.LENGTH_SHORT).show();
         } else {
             Intent i = new Intent(this, Formulario2Activity.class);

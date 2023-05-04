@@ -193,7 +193,5 @@ public class FormularioHora extends AppCompatActivity {
         tomas2 = findViewById(R.id.tomas2);
         tomas3 = findViewById(R.id.tomas3);
         tomas4 = findViewById(R.id.tomas4);
-
-        tvPreguntaHora.setText("¿Cuándo debe tomar la dosis?");
     }
 }
