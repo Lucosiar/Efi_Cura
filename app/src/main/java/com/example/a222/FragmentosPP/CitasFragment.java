@@ -21,11 +21,14 @@ import com.example.a222.Adaptadores.AdaptadorCitas;
 import com.example.a222.AdminSQLiteOpenHelper;
 import com.example.a222.ClasesGetSet.Cita;
 import com.example.a222.FormularioCita_Medico.CitaActivity;
+import com.example.a222.FormularioCita_Medico.EditarCitasActivity;
 import com.example.a222.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class CitasFragment extends Fragment{
@@ -49,6 +52,8 @@ public class CitasFragment extends Fragment{
                              Bundle savedInstanceState) {
 
         inicializar();
+        Calendar calendar = Calendar.getInstance();
+        Date currentData = calendar.getTime();
 
         //Container del fragmento
         View view = inflater.inflate(R.layout.fragment_citas, container, false);
@@ -72,7 +77,12 @@ public class CitasFragment extends Fragment{
 
         consultarCitas();
 
-        AdaptadorCitas adaptadorCitas = new AdaptadorCitas(context, citaList);
+        AdaptadorCitas adaptadorCitas = new AdaptadorCitas(context, citaList, citas ->{
+           Intent i = new Intent(getActivity(), EditarCitasActivity.class);
+           startActivity(i);
+        });
+
+        //AdaptadorCitas adaptadorCitas = new AdaptadorCitas(context, citaList);
         recyclerView.setAdapter(adaptadorCitas);
 
         return view;

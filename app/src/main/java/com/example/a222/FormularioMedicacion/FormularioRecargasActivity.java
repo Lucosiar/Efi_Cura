@@ -42,6 +42,7 @@ public class FormularioRecargasActivity extends AppCompatActivity {
 
     Cursor cursor;
 
+    Boolean pasarPreferences = false;
     String medicina = "";
     AlertDialog alertDialog;
 
@@ -68,11 +69,13 @@ public class FormularioRecargasActivity extends AppCompatActivity {
             cursor = db.rawQuery("Select * from medicacion where nombre = ?", new String[]{medicina});
 
             if(cursor != null && cursor.moveToFirst()) {
+                pasarPreferences = false;
                 cantidadActual = cursor.getString(10);
                 cantidadEnte = parseInt(cantidadActual);
                 mostrarCantidadActual = "Te quedan " + cantidadActual + " pastillas";
                 tvCuantasQuedan.setText(mostrarCantidadActual);
             }else{
+                pasarPreferences = true;
                 preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
                 editor = preferences.edit();
                 editor.putString("cantidadTotal", cantidadActual);
@@ -97,15 +100,26 @@ public class FormularioRecargasActivity extends AppCompatActivity {
             }else{
                 builder.setMessage(pregunta);
             }
-            texto = etCantidad.getText().toString();
-            cantidadNueva = parseInt(texto);
-            builder.setPositiveButton("Si", (dialog, which) -> {
-                cantidadTotal = cantidadNueva + cantidadEnte;
-                String sqlUpdate = "Update medicacion set cantidadCaja = " + cantidadTotal + " where nombre = '" + medicina + "'";
-                db.execSQL(sqlUpdate);
+            if(!pasarPreferences){
+                texto = etCantidad.getText().toString();
+                cantidadNueva = parseInt(texto);
+                builder.setPositiveButton("Si", (dialog, which) -> {
+                    cantidadTotal = cantidadNueva + cantidadEnte;
+                    String sqlUpdate = "Update medicacion set cantidadCaja = " + cantidadTotal + " where nombre = '" + medicina + "'";
+                    db.execSQL(sqlUpdate);
+                    Toast.makeText(context, "Cantidad guardada.", Toast.LENGTH_SHORT).show();
+                    finish();
+                });
+            }else{
+                pasarPreferences = false;
+                preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
+                editor = preferences.edit();
+                editor.putString("cantidadTotal", cantidadActual);
+                editor.commit();
                 Toast.makeText(context, "Cantidad guardada.", Toast.LENGTH_SHORT).show();
                 finish();
-            });
+            }
+
 
             builder.setNegativeButton("No", (dialog, which) -> {
                 //Error esta linea
@@ -119,16 +133,6 @@ public class FormularioRecargasActivity extends AppCompatActivity {
             alertDialog.show();
 
         });
-    }
-
-    public void sacarMedicacion(){
-
-    }
-    //Sacar la cantidad de pastillas que hay para luego antes de actualizar la cantidad
-    //que salga un dialogo en el que puedas decidir si sumar la medicacion a la que ya tenias
-    //O si ese num es tu medicacion final
-    public void sacarCantidadPastillas(){
-
     }
 
     private void inicializar(){

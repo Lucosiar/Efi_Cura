@@ -179,9 +179,17 @@ public class CitaActivity extends AppCompatActivity {
             int hora = c.get(Calendar.HOUR_OF_DAY);
             int minutos = c.get(Calendar.MINUTE);
 
-            TimePickerDialog timePickerDialog = new TimePickerDialog(citas, (view12, hourOfDay, minute) ->
-                    tvHora.setText(hourOfDay + ":" + minute), hora, minutos, true);
-            timePickerDialog.show();
+            //TimePicker correcto
+            TimePickerDialog time = new TimePickerDialog(citas, ((view1, hourOfDay, minute) -> {
+                String minutesST = minute < 10 ? "0" + minute : String.valueOf(minute);
+                tvHora.setText(hourOfDay + ":" + minutesST);
+            }), hora, minutos, true);
+            time.show();
+
+            //TimePickerDialog timePickerDialog = new TimePickerDialog(citas, (view12, hourOfDay, minute) ->
+              //      tvHora.setText(hourOfDay + ":" + minute), hora, minutos, true);
+            //timePickerDialog.show();
+
         }
     }
 

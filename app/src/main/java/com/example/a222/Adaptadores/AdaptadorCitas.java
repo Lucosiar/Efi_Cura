@@ -1,6 +1,7 @@
 package com.example.a222.Adaptadores;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a222.ClasesGetSet.Cita;
 import com.example.a222.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class AdaptadorCitas extends RecyclerView.Adapter<AdaptadorCitas.CitasViewHolder>{
     private final List<Cita> citaList;
+    String pattern  = "yyyy-MM-dd hh:mm";
+    private Context context;
+    private OnItemClickListener listener;
 
-    public AdaptadorCitas(Context mCtx, List<Cita>citaList){
+    public interface OnItemClickListener{
+        void onItemClick(Cita cita);
+    }
+    public AdaptadorCitas(Context context, List<Cita>citaList, OnItemClickListener listener){
         //Adaptador para el recycler view de las citas
         this.citaList = citaList;
+        this.context = context;
+        this.listener = listener;
     }
 
     @Override
@@ -35,6 +47,28 @@ public class AdaptadorCitas extends RecyclerView.Adapter<AdaptadorCitas.CitasVie
         holder.tvNombreMedico.setText(cita.getNombreMedico());
         holder.tvDia.setText(cita.getDia());
         holder.tvHora.setText(cita.getHora());
+
+        holder.itemView.setOnClickListener(v -> {
+            if(listener != null){
+                listener.onItemClick(cita);
+            }
+        });
+
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        Date citaDate = null;
+
+        try{
+            citaDate = sdf.parse(cita.getDia() + " " + cita.getHora());
+            Log.d(":::ERROR:", ("WTF: " + citaDate));
+        }catch(ParseException e){
+            e.printStackTrace();
+        }
+
+        if(citaDate != null && citaDate.before(new Date())){
+            citaList.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, citaList.size());
+        }
     }
 
     @Override
@@ -54,7 +88,5 @@ public class AdaptadorCitas extends RecyclerView.Adapter<AdaptadorCitas.CitasVie
            tvDia = view.findViewById(R.id.correoUsuario);
            tvHora = view.findViewById(R.id.HoraCitaElement);
         }
-
-
     }
 }
