@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a222.AdminSQLiteOpenHelper;
 import com.example.a222.Calendario.CalendarAdapter;
 import com.example.a222.Calendario.MyCalendar;
 import com.example.a222.Calendario.RecyclerTouchListener;
@@ -33,7 +35,6 @@ public class HomeFragment extends Fragment {
     private CalendarAdapter mAdapter;
     TextView tvHora1Toma, tvHora2Toma, tvHora3Toma, tvHora4Toma;
 
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         View view = inflater.inflate(R.layout.fragment_homee, container, false);
@@ -44,7 +45,6 @@ public class HomeFragment extends Fragment {
         tvHora3Toma = view.findViewById(R.id.tvHora3Toma);
         tvHora2Toma = view.findViewById(R.id.tvHora2Toma);
         tvHora1Toma = view.findViewById(R.id.tvHora1Toma);
-
 
         //Calendario
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);

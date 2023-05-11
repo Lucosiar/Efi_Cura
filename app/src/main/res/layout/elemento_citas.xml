@@ -18,7 +18,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/nombreUsuario"
+            android:id="@+id/idMedico"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5sp"
@@ -33,7 +33,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/correoUsuario"
+                android:id="@+id/nombreMedico"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Día"

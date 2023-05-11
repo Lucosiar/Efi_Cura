@@ -16,22 +16,36 @@
             android:id="@+id/textView31"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginEnd="10sp"
+            android:text="Citas programadas"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/checkBoxMostrarTodos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10sp"
             android:layout_marginTop="10sp"
-            android:text="Citas programadas"
+            android:layout_marginEnd="10sp"
+            android:text="Mostrar todas las citas"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="554dp"
+            android:layout_height="484dp"
             android:layout_marginStart="7sp"
 
-            android:layout_marginTop="5sp"
+            android:layout_marginTop="10sp"
             android:layout_marginEnd="7sp"
             android:scrollbars="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
         <Button
             android:id="@+id/botonAnadirMedicoFragment"

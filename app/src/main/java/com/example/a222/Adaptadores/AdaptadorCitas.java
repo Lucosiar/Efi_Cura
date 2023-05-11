@@ -19,7 +19,6 @@ import java.util.List;
 
 public class AdaptadorCitas extends RecyclerView.Adapter<AdaptadorCitas.CitasViewHolder>{
     private final List<Cita> citaList;
-    String pattern  = "yyyy-MM-dd hh:mm";
     private Context context;
     private OnItemClickListener listener;
 
@@ -53,22 +52,6 @@ public class AdaptadorCitas extends RecyclerView.Adapter<AdaptadorCitas.CitasVie
                 listener.onItemClick(cita);
             }
         });
-
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-        Date citaDate = null;
-
-        try{
-            citaDate = sdf.parse(cita.getDia() + " " + cita.getHora());
-            Log.d(":::ERROR:", ("WTF: " + citaDate));
-        }catch(ParseException e){
-            e.printStackTrace();
-        }
-
-        if(citaDate != null && citaDate.before(new Date())){
-            citaList.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, citaList.size());
-        }
     }
 
     @Override
@@ -84,8 +67,8 @@ public class AdaptadorCitas extends RecyclerView.Adapter<AdaptadorCitas.CitasVie
             super(view);
 
             //Definimos el click listener para el viewHolder View
-           tvNombreMedico = view.findViewById(R.id.nombreUsuario);
-           tvDia = view.findViewById(R.id.correoUsuario);
+           tvNombreMedico = view.findViewById(R.id.idMedico);
+           tvDia = view.findViewById(R.id.nombreMedico);
            tvHora = view.findViewById(R.id.HoraCitaElement);
         }
     }

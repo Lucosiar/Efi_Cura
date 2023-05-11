@@ -12,6 +12,13 @@
         android:background="@color/fondoAzul"
         android:orientation="vertical">
 
+        <ImageButton
+            android:id="@+id/bBorrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/fondoAzul"
+            app:srcCompat="@drawable/ic_baseline_delete" />
+
         <TextView
             android:id="@+id/textView44"
             android:layout_width="match_parent"
@@ -126,7 +133,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/bGuardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20sp"
@@ -137,7 +144,7 @@
             app:cornerRadius="130dp" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/bCancelarVolver"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="35sp"

@@ -44,6 +44,9 @@ public class PaginaPrincipal extends AppCompatActivity {
             } else if (id == R.id.Medicación) {
                 reemplazar(new MedicacionFragment());
                 return true;
+            }else if(id == R.id.Sintomas){
+                reemplazar(new SintomasFragment());
+                return true;
             }
             return false;
         });
@@ -86,5 +89,4 @@ public class PaginaPrincipal extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

@@ -18,6 +18,12 @@
         android:id="@+id/Medicación"
         android:icon="@drawable/ic_launcher_medicacion"
         android:title="Medicación">
+    </item>
+
+    <item
+        android:id="@+id/Sintomas"
+        android:icon="@drawable/ic_baseline_emoji_emotions"
+        android:title="Salud">
 
     </item>
 

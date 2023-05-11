@@ -41,8 +41,6 @@ public class MedicacionActivity extends AppCompatActivity {
         bun = iin.getExtras();
         recargar();
 
-
-
         botonRecarga.setOnClickListener(v -> {
             Intent recargas = new Intent(this, FormularioRecargasActivity.class);
             recargas.putExtra("nombre", medicinaSeleccionada);

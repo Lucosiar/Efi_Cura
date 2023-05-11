@@ -67,7 +67,7 @@ public class MedicacionFragment extends Fragment {
 
         consultarMedicacion();
 
-        AdaptadorMedicacion adaptadorMedicacion = new AdaptadorMedicacion(context, medicacionList, medicacion -> {
+        AdaptadorMedicacion adaptadorMedicacion = new AdaptadorMedicacion(context, medicacionList, (Medicacion medicacion) -> {
             Intent intent = new Intent(getActivity(), MedicacionActivity.class);
             intent.putExtra("nombre",  medicacion.getNombre());
             startActivity(intent);

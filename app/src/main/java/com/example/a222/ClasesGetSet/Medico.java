@@ -3,13 +3,15 @@ package com.example.a222.ClasesGetSet;
 public class Medico {
 
     //Clase con los atributos de los medicos
+    private int id;
     private String nombre;
     private String especialidad;
     private String hospital;
     private String numero;
     private String correo;
 
-    public Medico(String nombre, String especialidad, String hospital, String numero, String correo) {
+    public Medico(int id, String nombre, String especialidad, String hospital, String numero, String correo) {
+        this.id = id;
         this.nombre = nombre;
         this.especialidad = especialidad;
         this.hospital = hospital;
@@ -20,6 +22,10 @@ public class Medico {
     public Medico(){
 
     }
+
+    public int getId(){return id;}
+
+    public void setId(int id){this.id = id;}
 
     public String getNombre() {
         return nombre;
@@ -37,9 +43,7 @@ public class Medico {
         this.especialidad = especialidad;
     }
 
-    public String getHospital() {
-        return hospital;
-    }
+    public String getHospital() {return hospital;}
 
     public void setHospital(String hospital) {
         this.hospital = hospital;
