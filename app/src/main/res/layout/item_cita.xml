@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/medicoTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="391dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:textColor="#000000"
@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/diaTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="391dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:textColor="#000000"
@@ -34,7 +34,7 @@
 
         <TextView
             android:id="@+id/horaTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="391dp"
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:textSize="14sp" />

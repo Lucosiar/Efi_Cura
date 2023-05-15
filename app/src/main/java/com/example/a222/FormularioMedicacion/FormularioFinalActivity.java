@@ -30,7 +30,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
     AdminSQLiteOpenHelper db;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-    String nombre, forma, cantidadDiaria, hora1, frecu, notaComida, fechaIni, fechaFin, usuario, hora2, hora3, hora4, cantidadTotal;
+    String nombre, forma, cantidadDiaria, hora1, frecu, notaComida, fechaIni, fechaFin, usuario, hora2, hora3, hora4, cantidadTotal, diasTomas;
     int duracion;
     String duracionS;
 
@@ -76,6 +76,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
         fechaIni = preferences.getString("fechaIni", "");
         duracion = preferences.getInt("duracion", 0);
         fechaFin = preferences.getString("fechaFin", "SINFCH");
+        diasTomas = preferences.getString("diasToma", "*");
 
         //Parseamos la cantidad para poder poner bien el formato
         int canti = Integer.parseInt(cantidadDiaria);
@@ -106,7 +107,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
         duracionS = String.valueOf(duracion);
 
         //Insertamos todos los valores en la base de datos
-        db.insertarMedicacion(nombre, cantidadDiaria, fechaIni, fechaFin, duracionS, frecu, hora1, hora2, hora3, hora4, cantidadTotal, forma, notaComida, usuario);
+        db.insertarMedicacion(nombre, cantidadDiaria, fechaIni, fechaFin, duracionS, frecu, hora1, hora2, hora3, hora4, cantidadTotal, forma, notaComida, diasTomas, usuario);
         Toast.makeText(ffa, "La medicación ha sido guarda", Toast.LENGTH_SHORT).show();
     }
 

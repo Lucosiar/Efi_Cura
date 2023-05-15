@@ -27,6 +27,8 @@ import com.example.a222.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -109,6 +111,7 @@ public class CitasFragment extends Fragment{
         cursor.close();
         sql.close();
         Log.d(":::TAG:", "Numero de citas: " + citaList.size());
+        ordenarCitas();
     }
 
     private String consultarCorreo(String usuario){
@@ -131,9 +134,9 @@ public class CitasFragment extends Fragment{
     }
 
 
-/*    private void ordenarCitas(){
+   private void ordenarCitas(){
         Collections.sort(citaList, Comparator.comparing(Cita::getDia));
-    }*/
+    }
 
 /*    private void consultarCitas(){
         citaList.clear();

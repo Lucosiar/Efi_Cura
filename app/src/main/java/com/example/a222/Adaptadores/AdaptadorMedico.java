@@ -39,7 +39,6 @@ public class AdaptadorMedico extends RecyclerView.Adapter<AdaptadorMedico.Medico
     public void onBindViewHolder(MedicoViewHolder holder, int position){
         Medico medico = medicoList.get(position);
 
-        //No tiene sentido que se imprima asi :)
         String id = String.valueOf(medico.getId());
         holder.idMedico.setText(id);
         holder.nombreMedico.setText(medico.getNombre());

@@ -26,7 +26,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         //Medicaciones
         db.execSQL("create table medicacion(nombre text primary key, cantidadDiaria int, fechaIni text, " +
                "fechaFin text, duracion int, toma1 text, toma2 text, toma3 text, toma4 text, cantidadCaja int, formato TEXT, "
-                + "notaComida TEXT, usuario TEXT)");
+                + "notaComida TEXT, diasTomas text, usuario TEXT)");
 
         //Medicos
         db.execSQL("create table medicos(id int Primary key, nombre TEXT, especialidad text, hospital text, numero String, correo text, usuario TEXT)");
@@ -34,6 +34,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         //Citas
         db.execSQL("create table citas(id int Primary key, nombreMedico TEXT, dia text, hora text, usuario TEXT)");
         //Servicio de la cita por ejemplo: medicina interna...
+
+        db.execSQL("create table sintomas(id int primary key, tipo TEXT, hora TEXT, fecha text, alta int, baja int, dolor int, usuario TEXT)");
     }
 
     @Override
@@ -42,6 +44,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists medicacion");
         db.execSQL("drop table if exists medicos");
         db.execSQL("drop table if exists citas");
+        db.execSQL("drop table if exists sintomas");
         onCreate(db);
     }
 
@@ -75,23 +78,6 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         return cursor.getCount() > 0;
     }
 
-    //introducir medico -- NO FUNCIONA NO LO USO --
-    public boolean insertarMedicos(String nombre, String especialidad, String hospital, String numero, String correo){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        values.put("nombre", nombre);
-        values.put("especialidad", especialidad);
-        values.put("hospital", hospital);
-        values.put("numero", numero);
-        values.put("correo", correo);
-
-        long result = db.insert("medicos", null, values);
-        return result != -1;
-
-    }
-
-
     //intertar en la base de citas
     public void insertarCita(String nombreMedico, String dia, String hora, String usuario){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -105,7 +91,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     public void insertarMedicacion(String nombre, String cantidadDiaria, String fechaIni, String fechaFin, String duracion, String frecuencia,
-                                   String toma1, String toma2, String toma3, String toma4, String cantidadCaja, String formato, String notaComida, String usuario){
+                                   String toma1, String toma2, String toma3, String toma4, String cantidadCaja, String formato, String notaComida,
+                                   String diasTomas, String usuario){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -123,6 +110,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put("cantidadCaja", cantidadCaja);
         values.put("formato", formato);
         values.put("notaComida", notaComida);
+        values.put("diasTomas", diasTomas);
         values.put("usuario", usuario);
         db.insert("medicacion", null, values);
         db.close();
