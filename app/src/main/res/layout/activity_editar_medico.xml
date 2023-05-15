@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     tools:context=".FormularioCita_Medico.EditarMedicoActivity">
 
     <LinearLayout
@@ -53,114 +54,138 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView48"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
+            android:layout_height="437dp"
+            android:layout_marginStart="15sp"
             android:layout_marginTop="20sp"
-            android:layout_marginEnd="20sp"
-            android:text="Médico"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:layout_marginEnd="15sp"
+            android:backgroundTint="@color/azulOscurito"
+            card_view:cardCornerRadius = "30sp">
 
-        <TextView
-            android:id="@+id/tvMostrarNombreMedico"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="7sp"
-            android:layout_marginEnd="20sp"
-            android:text="Nombre"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView51"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="15sp"
-            android:layout_marginEnd="20sp"
-            android:text="Especialidad"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/textView48"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35sp"
+                    android:layout_marginTop="30sp"
+                    android:layout_marginEnd="35sp"
+                    android:text="Médico"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
 
-        <TextView
-            android:id="@+id/tvMostrarEspecialidad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="7sp"
-            android:layout_marginEnd="20sp"
-            android:text="especiali"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/tvMostrarNombreMedico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35sp"
+                    android:layout_marginTop="7sp"
+                    android:layout_marginEnd="35sp"
+                    android:text="Nombre"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/textView53"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="15sp"
-            android:layout_marginEnd="20sp"
-            android:text="Hospital"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/textView51"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35sp"
+                    android:layout_marginTop="15sp"
+                    android:layout_marginEnd="35sp"
+                    android:text="Especialidad"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
 
-        <TextView
-            android:id="@+id/tvMostrarHospital"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="7sp"
-            android:layout_marginEnd="20sp"
-            android:text="hospi"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/tvMostrarEspecialidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35sp"
+                    android:layout_marginTop="7sp"
+                    android:layout_marginEnd="35sp"
+                    android:text="especiali"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/textView55"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="15sp"
-            android:layout_marginEnd="20sp"
-            android:text="Número Teléfono"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/textView53"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35sp"
+                    android:layout_marginTop="15sp"
+                    android:layout_marginEnd="35sp"
+                    android:text="Hospital"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
 
-        <TextView
-            android:id="@+id/tvMostrarTelefono"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="7sp"
-            android:layout_marginEnd="20sp"
-            android:text="+355446"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/tvMostrarHospital"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35sp"
+                    android:layout_marginTop="7sp"
+                    android:layout_marginEnd="35sp"
+                    android:text="hospi"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/textView57"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="15sp"
-            android:layout_marginEnd="20sp"
-            android:text="Correo electrónico"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/textView55"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35sp"
+                    android:layout_marginTop="15sp"
+                    android:layout_marginEnd="35sp"
+                    android:text="Número Teléfono"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
 
-        <TextView
-            android:id="@+id/tvMostrarCorreo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="7sp"
-            android:layout_marginEnd="20sp"
-            android:text="adjas@kalfad"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/tvMostrarTelefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35sp"
+                    android:layout_marginTop="7sp"
+                    android:layout_marginEnd="35sp"
+                    android:text="+355446"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textView57"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35sp"
+                    android:layout_marginTop="15sp"
+                    android:layout_marginEnd="35sp"
+                    android:text="Correo electrónico"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/tvMostrarCorreo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35sp"
+                    android:layout_marginTop="7sp"
+                    android:layout_marginEnd="35sp"
+                    android:text="adjas@kalfad"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textView54"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

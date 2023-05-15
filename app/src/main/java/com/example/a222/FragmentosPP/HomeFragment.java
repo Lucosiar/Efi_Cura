@@ -1,5 +1,9 @@
 package com.example.a222.FragmentosPP;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,38 +17,46 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a222.Adaptadores.AdaptadorCitasMedicaciones;
 import com.example.a222.AdminSQLiteOpenHelper;
 import com.example.a222.Calendario.CalendarAdapter;
 import com.example.a222.Calendario.MyCalendar;
 import com.example.a222.Calendario.RecyclerTouchListener;
 import com.example.a222.Calendario.myCalendarData;
+import com.example.a222.ClasesGetSet.Cita;
+import com.example.a222.ClasesGetSet.Medicacion;
 import com.example.a222.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
     private final List<MyCalendar> calendarList= new ArrayList<>();
     private CalendarAdapter mAdapter;
-    TextView tvHora1Toma, tvHora2Toma, tvHora3Toma, tvHora4Toma;
+    RecyclerView recyclerViewId;
+    Context context;
+    AdminSQLiteOpenHelper db;
+    SharedPreferences s;
+    FragmentActivity home;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         View view = inflater.inflate(R.layout.fragment_homee, container, false);
 
-        if (getActivity() != null) {getActivity().setTitle("Inicio");}
+        recyclerViewId = view.findViewById(R.id.recyclerViewId);
+        home = getActivity();
 
-        tvHora4Toma = view.findViewById(R.id.tvHora4Toma);
-        tvHora3Toma = view.findViewById(R.id.tvHora3Toma);
-        tvHora2Toma = view.findViewById(R.id.tvHora2Toma);
-        tvHora1Toma = view.findViewById(R.id.tvHora1Toma);
+        if (getActivity() != null) {getActivity().setTitle("Inicio");}
 
         //Calendario
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
@@ -89,6 +101,88 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    private void mostrarTodo(){
+        Calendar today = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        String fechaActual = sdf.format(today.getTime());
+
+        List <Cita> citasHoyList = consultarCitas(fechaActual);
+        List <Medicacion> medicacionHoyList = consultarMedicaciones(fechaActual);
+
+        List <Object> items = new ArrayList<>();
+
+        if(!citasHoyList.isEmpty()){
+            items.add("Citas de hoy");
+            items.addAll(citasHoyList);
+        }
+
+        if(!medicacionHoyList.isEmpty()){
+            items.add("Medicaciones de hoy");
+            items.addAll(medicacionHoyList);
+        }
+
+        recyclerViewId.setLayoutManager(new LinearLayoutManager(context));
+        recyclerViewId.setAdapter(new AdaptadorCitasMedicaciones(items));
+
+    }
+
+    private List<Medicacion> consultarMedicaciones(String fechaActual){
+        List<Medicacion> medicacionList = new ArrayList<>();
+
+        db = new AdminSQLiteOpenHelper(context);
+        SQLiteDatabase sql = db.getReadableDatabase();
+
+
+        s = home.getSharedPreferences("usuarios", Context.MODE_PRIVATE);
+        String nombre = s.getString("nombre", "");
+        String nombreUsuario = consultarCorreo(nombre);
+
+        Cursor cursor = sql.rawQuery("Select * from medicaciones where usuario = ?", new String[]{nombreUsuario});
+
+        while (cursor.moveToNext()) {
+            Medicacion medicacion = new Medicacion();
+
+            medicacion.setNombre(cursor.getString(1));
+            medicacion.setToma1(cursor.getString(2));
+
+            medicacionList.add(medicacion);
+        }
+
+        cursor.close();
+        sql.close();
+
+        return medicacionList;
+
+    }
+
+    private List<Cita> consultarCitas(String fechaActual){
+        List<Cita> citaList = new ArrayList<>();
+
+        db = new AdminSQLiteOpenHelper(context);
+        SQLiteDatabase sql = db.getReadableDatabase();
+
+
+        s = home.getSharedPreferences("usuarios", Context.MODE_PRIVATE);
+        String nombre = s.getString("nombre", "");
+        String nombreUsuario = consultarCorreo(nombre);
+
+        Cursor cursor = sql.rawQuery("Select * from citas where fecha = ? and usuario = ?", new String[]{fechaActual, nombreUsuario});
+
+        while (cursor.moveToNext()) {
+            Cita cita = new Cita();
+
+            cita.setNombreMedico(cursor.getString(1));
+            cita.setDia(cursor.getString(2));
+
+            citaList.add(cita);
+        }
+
+        cursor.close();
+        sql.close();
+
+        return citaList;
+    }
+
 
     private void prepareCalendarData() {
         Calendar today = Calendar.getInstance();
@@ -113,5 +207,23 @@ public class HomeFragment extends Fragment {
         mAdapter.notifyItemRangeChanged(size - 30, size);
     }
 
+    private String consultarCorreo(String usuario){
+        SQLiteDatabase base = db.getReadableDatabase();
+        Cursor cursor = base.rawQuery("select correo from usuarios where usuario = ?", new String[]{usuario});
+
+        String correo = "";
+        int columIndex = cursor.getColumnIndex("correo");
+        if(columIndex>=0 && cursor.moveToFirst()){
+            correo = cursor.getString(columIndex);
+        }
+        cursor.close();
+        return correo;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 }
 

@@ -24,8 +24,8 @@ public class EditarMedicoActivity extends AppCompatActivity {
 
     String medicoSeleccionado = "";
     String especialidadMedico = "";
-    String noNumeroAsignado = "No tiene ningún número asignado.";
-    String noCorreoAsignado = "No tienen ningún correo asignado";
+    String noNumeroAsignado = "No tiene número asignado.";
+    String noCorreoAsignado = "No tienen correo asignado";
 
     Context context;
     Intent intent;
@@ -65,6 +65,7 @@ public class EditarMedicoActivity extends AppCompatActivity {
 
     private void aceptarBorrado(){
         eliminarMedico(medicoSeleccionado, especialidadMedico);
+        eliminarCitas_MedicosEliminados(medicoSeleccionado, especialidadMedico);
         Toast.makeText(this, "Medico eliminado correctamente", Toast.LENGTH_SHORT).show();
         finish();
     }
@@ -83,6 +84,29 @@ public class EditarMedicoActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "No se ha encontrado el medico", Toast.LENGTH_SHORT).show();
         }
+        db.close();
+    }
+
+    private void eliminarCitas_MedicosEliminados(String medicoSeleccionado, String especialidadMedico){
+        AdminSQLiteOpenHelper db = new AdminSQLiteOpenHelper(context);
+        SQLiteDatabase sql = db.getWritableDatabase();
+
+        String citaCompleta = medicoSeleccionado + " - " + especialidadMedico;
+
+        Cursor cursor = sql.rawQuery("Select id from citas where nombreMedico = ?", new String[]{citaCompleta});
+
+        //Citas guardadas como nombreMedico = "nombre - especialidad"
+        if(cursor.moveToFirst()) {
+            do {
+                int idCita = cursor.getInt(0);
+                sql.delete("citas", "id = ?", new String[]{String.valueOf(idCita)});
+            }while(cursor.moveToNext());
+            Toast.makeText(this, "Citas eliminadas correctamente", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "No se han encontrado citas asociadas a este médico", Toast.LENGTH_SHORT).show();
+        }
+
+        cursor.close();
         db.close();
     }
 

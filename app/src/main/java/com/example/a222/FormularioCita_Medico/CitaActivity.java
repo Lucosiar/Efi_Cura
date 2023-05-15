@@ -3,33 +3,37 @@ package com.example.a222.FormularioCita_Medico;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.work.Data;
 
 import com.example.a222.AdminSQLiteOpenHelper;
 import com.example.a222.ClasesGetSet.Medico;
 import com.example.a222.FragmentosPP.PaginaPrincipal;
+import com.example.a222.Notificaciones.WorkManagerNoti;
 import com.example.a222.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.UUID;
 
 public class CitaActivity extends AppCompatActivity {
     //Activity para añadir y crear una cita nueva
@@ -39,8 +43,7 @@ public class CitaActivity extends AppCompatActivity {
     ArrayList<Medico>MedicoLista;
     AdminSQLiteOpenHelper db;
     Activity citas;
-    String usu;
-    String usuario;
+    String usu, usuario;
     Context context;
     SharedPreferences preferences;
     TextView tvDia, tvHora, tvMedico;
@@ -70,7 +73,8 @@ public class CitaActivity extends AppCompatActivity {
         spinnerMedicos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                tvMedico.setText("" + spinnerMedicos.getItemAtPosition(i));
+                String mostrarTexto = "" + spinnerMedicos.getItemAtPosition(i);
+                tvMedico.setText(mostrarTexto);
             }
 
             @Override
@@ -79,16 +83,95 @@ public class CitaActivity extends AppCompatActivity {
             }
         });
 
+        bDia.setOnClickListener(v -> {
+                    final Calendar c = Calendar.getInstance();
+
+                    int dia = c.get(Calendar.DAY_OF_MONTH);
+                    int mes = c.get(Calendar.MONTH);
+                    int ano = c.get(Calendar.YEAR);
+
+                    c.set(ano, mes, dia);
+
+
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(citas, (view1, year, month, dayOfMonth) ->
+                            tvDia.setText(dayOfMonth + "/" + (month + 1) + "/" + year), dia, mes, ano);
+                    //Seleccionamos la fecha actual del dispositivo
+                    datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
+                    datePickerDialog.getDatePicker().init(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), (view12, year, monthOfYear, dayOfMonth) -> {
+                        Calendar selectedDate = Calendar.getInstance();
+                        //Cogemos el dia seleccionado
+                        selectedDate.set(year, monthOfYear, dayOfMonth);
+                        int dayOfWeek = selectedDate.get(Calendar.DAY_OF_WEEK);
+                        //En caso de que sea fin de semana, se cerrara la seleccion de la fecha
+                        if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY) {
+                            Toast.makeText(citas, "No se puede seleccionar un fin de semana para una cita médica.", Toast.LENGTH_LONG).show();
+                            datePickerDialog.dismiss();
+                        }
+                    });
+                    datePickerDialog.show();
+        });
+
+        bHora.setOnClickListener(v -> {
+            final Calendar c = Calendar.getInstance();
+            int hora = c.get(Calendar.HOUR_OF_DAY);
+            int minutos = c.get(Calendar.MINUTE);
+
+            //TimePicker correcto
+            TimePickerDialog time = new TimePickerDialog(citas, ((view1, hourOfDay, minute) -> {
+                String minutesST = minute < 10 ? "0" + minute : String.valueOf(minute);
+                String mostrarTexto = hourOfDay + ":" + minutesST;
+                tvHora.setText(mostrarTexto);
+            }), hora, minutos, true);
+            time.show();
+        });
+
+
         //Boton para añadir la cita en la base de datos
         botonAnadirCita2 = findViewById(R.id.botonAnadirCita2);
         botonAnadirCita2.setOnClickListener(v -> {
             String nombre = tvMedico.getText().toString();
             String dia = tvDia.getText().toString();
             String hora = tvHora.getText().toString();
+/*
 
-            if(!validar()){
+            if(hora.contains(":")){
+                hora = hora.replace(":", "");
+            }
 
-            }else{
+            String citaCompleta = "2000/01/01" + " " + hora;
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+            Calendar calendar = Calendar.getInstance();
+            try{
+                Date date = sdf.parse(citaCompleta);
+                calendar.setTime(date);
+                Log.d(":::Mostrar:", ("Hora; " + citaCompleta));
+                Log.d(":::Mostrar:", ("Date: " + date));
+
+            }catch(ParseException e) {
+                Log.e(":::ERROR:", ("Hora" + citaCompleta));
+                e.printStackTrace();
+            }
+
+            String horaGuardada = String.format("%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+
+            String tag = generateKey();
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.setTimeInMillis(System.currentTimeMillis());
+            calendar2.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hora.substring(0, 2)));
+            calendar2.set(Calendar.MINUTE, Integer.parseInt(hora.substring(2)));
+            calendar2.set(Calendar.SECOND, 0);
+            calendar2.set(Calendar.MILLISECOND, 0);
+            calendar2.add(Calendar.HOUR_OF_DAY, -24);
+
+            Long Alerttime = calendar.getTimeInMillis() - System.currentTimeMillis();
+
+            Data data = guardarData();
+            WorkManagerNoti.guardarNoti(Alerttime, data, tag);
+*/
+
+            if(validar()) {
                 preferences = getSharedPreferences("usuarios", Context.MODE_PRIVATE);
                 usu = preferences.getString("nombre", "");
                 usuario = consultarCorreo(usu);
@@ -97,10 +180,16 @@ public class CitaActivity extends AppCompatActivity {
                 Toast.makeText(citas, "Cita registrada", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(citas, PaginaPrincipal.class);
                 startActivity(i);
-
             }
         });
+    }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        consultarMedicos();
+        ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listaMedicos);
+        spinnerMedicos.setAdapter(adaptador);
     }
 
     //Método para consultar los medicos en la base de datos
@@ -128,69 +217,21 @@ public class CitaActivity extends AppCompatActivity {
         listaMedicos = new ArrayList<>();
         listaMedicos.add("Seleccione: ");
 
-        for(int i = 1; i<MedicoLista.size(); i++){
+        for(int i = 0; i<MedicoLista.size(); i++){
             listaMedicos.add(MedicoLista.get(i).getNombre() + " - " +
-                   MedicoLista.get(i).getEspecialidad()); //+ " - " +
-                    //MedicoLista.get(i).getEspecialidad() + " -"  +
-                    //MedicoLista.get(i).getHospital() + " - " +
-                   // MedicoLista.get(i).getNumero() + " - " +
-                   // MedicoLista.get(i).getCorreo());
+                   MedicoLista.get(i).getEspecialidad());
         }
     }
 
-    //Metodo onclick para boton de seleccion de fecha
-    public void click(View view){
-        //Elegimos el dia
-        if(view == bDia){
-            final Calendar c = Calendar.getInstance();
+    private String generateKey(){
+        return UUID.randomUUID().toString();
+    }
 
-            int dia = c.get(Calendar.DAY_OF_MONTH);
-            int mes = c.get(Calendar.MONTH);
-            int ano = c.get(Calendar.YEAR);
-
-            c.set(ano, mes, dia);
-
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(citas, (view1, year, month, dayOfMonth) ->
-                tvDia.setText(dayOfMonth + "/" + (month + 1) + "/" + year), dia, mes, ano);
-            //Seleccionamos la fecha actual del dispositivo
-            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
-
-            datePickerDialog.getDatePicker().init(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
-                @Override
-                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    Calendar selectedDate = Calendar.getInstance();
-                    //Cogemos el dia seleccionado
-                    selectedDate.set(year, monthOfYear, dayOfMonth);
-                    int dayOfWeek = selectedDate.get(Calendar.DAY_OF_WEEK);
-                    //En caso de que sea fin de semana, se cerrara la seleccion de la fecha
-                    if(dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY){
-                        Toast.makeText(citas, "No se puede seleccionar un fin de semana para una cita médica.", Toast.LENGTH_LONG).show();
-                        datePickerDialog.dismiss();
-                    }
-                }
-            });
-            datePickerDialog.show();
-        }
-
-        //Elegimos la horas
-        if(view == bHora){
-            final Calendar c = Calendar.getInstance();
-            int hora = c.get(Calendar.HOUR_OF_DAY);
-            int minutos = c.get(Calendar.MINUTE);
-
-            //TimePicker correcto
-            TimePickerDialog time = new TimePickerDialog(citas, ((view1, hourOfDay, minute) -> {
-                String minutesST = minute < 10 ? "0" + minute : String.valueOf(minute);
-                tvHora.setText(hourOfDay + ":" + minutesST);
-            }), hora, minutos, true);
-            time.show();
-
-            //TimePickerDialog timePickerDialog = new TimePickerDialog(citas, (view12, hourOfDay, minute) ->
-              //      tvHora.setText(hourOfDay + ":" + minute), hora, minutos, true);
-            //timePickerDialog.show();
-
-        }
+    private Data guardarData(){
+        return new Data.Builder()
+                .putString("cita", "Cita programada")
+                .putString("detalle", "Mañana tiene una cita, revísela")
+                .build();
     }
 
     //validacion de los campos incompletos
@@ -215,7 +256,7 @@ public class CitaActivity extends AppCompatActivity {
         return ret;
     }
 
-    private void inicializar(){
+    public void inicializar(){
         //Activity bar
         this.setTitle("Añadir Cita");
 
