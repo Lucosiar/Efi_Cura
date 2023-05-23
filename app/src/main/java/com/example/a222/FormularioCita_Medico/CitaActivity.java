@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,15 +23,10 @@ import androidx.work.Data;
 import com.example.a222.AdminSQLiteOpenHelper;
 import com.example.a222.ClasesGetSet.Medico;
 import com.example.a222.FragmentosPP.PaginaPrincipal;
-import com.example.a222.Notificaciones.WorkManagerNoti;
 import com.example.a222.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.UUID;
 
 public class CitaActivity extends AppCompatActivity {
@@ -273,7 +267,7 @@ public class CitaActivity extends AppCompatActivity {
 
         //Vinculaciones para datepicker
         bDia = findViewById(R.id.bDia);
-        bHora = findViewById(R.id.bHora);
+        bHora = findViewById(R.id.bHoraSintoma);
         tvDia = findViewById(R.id.tvDia);
         tvHora = findViewById(R.id.tvHora);
     }

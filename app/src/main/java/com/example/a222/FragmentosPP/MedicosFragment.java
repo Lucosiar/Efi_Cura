@@ -13,6 +13,8 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,13 +24,14 @@ import com.example.a222.ClasesGetSet.Medico;
 import com.example.a222.FormularioCita_Medico.EditarMedicoActivity;
 import com.example.a222.FormularioCita_Medico.MedicoActivity;
 import com.example.a222.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MedicosFragment extends Fragment {
     FragmentActivity medico;
-    Button botonAnadirMedicoFragment;
+    Button botonAnadirMedicoFragment, bVerCitas;
 
     AdminSQLiteOpenHelper db;
     Context context;
@@ -56,6 +59,14 @@ public class MedicosFragment extends Fragment {
             startActivity(i);
         });
 
+        bVerCitas = view.findViewById(R.id.bVerCitas);
+        bVerCitas.setOnClickListener(v -> {
+            Fragment citasFragment = new CitasFragment();
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container, citasFragment);
+            fragmentTransaction.commit();
+        });
 
         //Base de datos
         db = new AdminSQLiteOpenHelper(medico);
@@ -64,6 +75,10 @@ public class MedicosFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         medicoList = new ArrayList<>();
+
+        PaginaPrincipal pagina = (PaginaPrincipal) getActivity();
+        FloatingActionButton fab = pagina.floatingActionButton;
+        fab.setVisibility(View.GONE);
 
         return view;
     }

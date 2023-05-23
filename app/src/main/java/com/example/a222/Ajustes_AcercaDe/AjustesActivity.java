@@ -25,12 +25,12 @@ import com.example.a222.Registro_Login.InicioSesion;
 
 public class AjustesActivity extends AppCompatActivity {
 
-    Button cerrarSesion;
+    Button cerrarSesion, bVolverAjustes;
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     String llave = "sesion";
-    Switch swModoOscuro;
+    Switch sMedicacion, sRecargas, sCitas, sSintomas;
 
     TextView tvUsuario, tvCorreo;
     String usu;
@@ -49,16 +49,30 @@ public class AjustesActivity extends AppCompatActivity {
         preferences = getSharedPreferences("usuarios",Context.MODE_PRIVATE);
         usu = preferences.getString("nombre", "");
         tvUsuario.setText(usu);
-        tvCorreo.setText("Correo: " + consultarCorreo(usu));
+        tvCorreo.setText("" + consultarCorreo(usu));
 
         tvCorreo.setTypeface(tvCorreo.getTypeface(), Typeface.ITALIC);
 
         cerrarSesion.setOnClickListener(v -> logout());
 
+        bVolverAjustes.setOnClickListener(v -> {
+
+            preferences = getSharedPreferences("usuarios", Context.MODE_PRIVATE);
+            editor = preferences.edit();
+            boolean sSintomasState = sSintomas.isChecked();
+            boolean sCitasState = sCitas.isChecked();
+            boolean sRecargasState = sRecargas.isChecked();
+            boolean sMedicacionState = sMedicacion.isChecked();
+
+            editor.putBoolean("sSintomas", sSintomasState);
+            editor.putBoolean("sCitas", sCitasState);
+            editor.putBoolean("sRecargas", sRecargasState);
+            editor.putBoolean("sMedicacion", sMedicacionState);
+            editor.apply();
+
+            finish();
+        });
     }
-
-
-
 
     //Cerrar sesion
     private void logout(){
@@ -80,14 +94,6 @@ public class AjustesActivity extends AppCompatActivity {
 
     }
 
-    public void inicializar(){
-        cerrarSesion = findViewById(R.id.cerrarSesion);
-        tvUsuario = findViewById(R.id.tvUsuario);
-        tvCorreo = findViewById(R.id.tvCorreo);
-        db = new AdminSQLiteOpenHelper(this);
-        swModoOscuro = findViewById(R.id.swModoOscuro);
-    }
-
     //Sacar el correo electronico de la base de datos
     private String consultarCorreo(String usuario){
         SQLiteDatabase base = db.getReadableDatabase();
@@ -100,5 +106,32 @@ public class AjustesActivity extends AppCompatActivity {
         }
         cursor.close();
         return correo;
+    }
+
+    public void inicializar(){
+        cerrarSesion = findViewById(R.id.cerrarSesion);
+        bVolverAjustes = findViewById(R.id.bVolverAjustes);
+
+        tvUsuario = findViewById(R.id.tvUsuario);
+        tvCorreo = findViewById(R.id.tvCorreo);
+
+        sSintomas = findViewById(R.id.sSintomas);
+        sCitas = findViewById(R.id.sCitas);
+        sRecargas = findViewById(R.id.sRecargas);
+        sMedicacion = findViewById(R.id.sMedicacion);
+
+        preferences = getSharedPreferences("usuarios", Context.MODE_PRIVATE);
+        boolean sSintomaState = preferences.getBoolean("sSintomas", false);
+        boolean sCitasState = preferences.getBoolean("sCitas", false);
+        boolean sRecargasState = preferences.getBoolean("sRecargas", false);
+        boolean sMedicacionState = preferences.getBoolean("sMedicacion", false);
+
+
+        sSintomas.setChecked(sSintomaState);
+        sCitas.setChecked(sCitasState);
+        sRecargas.setChecked(sRecargasState);
+        sMedicacion.setChecked(sMedicacionState);
+
+        db = new AdminSQLiteOpenHelper(this);
     }
 }

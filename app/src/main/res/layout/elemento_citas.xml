@@ -21,6 +21,7 @@
             android:id="@+id/idMedico"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
             android:layout_marginTop="5sp"
             android:layout_marginBottom="10sp"
             android:text="Nombre Médico"
@@ -36,6 +37,8 @@
                 android:id="@+id/nombreMedico"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"
                 android:text="Día"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
@@ -54,6 +57,7 @@
                 android:id="@+id/HoraCitaElement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
                 android:text="Hora"
                 android:textColor="@color/white"
                 android:textSize="20sp" />

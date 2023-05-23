@@ -71,6 +71,9 @@ public class FormularioRecargasActivity extends AppCompatActivity {
             if(cursor != null && cursor.moveToFirst()) {
                 pasarPreferences = false;
                 cantidadActual = cursor.getString(10);
+                if(cantidadActual == null){
+                    cantidadActual = "0";
+                }
                 cantidadEnte = parseInt(cantidadActual);
                 mostrarCantidadActual = "Te quedan " + cantidadActual + " pastillas";
                 tvCuantasQuedan.setText(mostrarCantidadActual);

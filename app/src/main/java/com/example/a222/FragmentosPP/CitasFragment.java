@@ -15,15 +15,19 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a222.Adaptadores.AdaptadorCitas;
 import com.example.a222.AdminSQLiteOpenHelper;
 import com.example.a222.ClasesGetSet.Cita;
+import com.example.a222.ClasesGetSet.Medico;
 import com.example.a222.FormularioCita_Medico.CitaActivity;
 import com.example.a222.FormularioCita_Medico.EditarCitasActivity;
 import com.example.a222.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,7 +41,7 @@ public class CitasFragment extends Fragment{
 
     //Fragmento que muestra el recyclerview con todas las citas;
     RecyclerView recyclerView;
-    Button botonAnadirCita;
+    Button botonAnadirCita, bVerMedicos;
     Context context;
     FragmentActivity citas;
     AdminSQLiteOpenHelper db;
@@ -60,22 +64,49 @@ public class CitasFragment extends Fragment{
             startActivity(i);
         });
 
+        bVerMedicos = view.findViewById(R.id.bVerMedicos);
+        bVerMedicos.setOnClickListener(v -> {
+            Fragment medicosFragment = new MedicosFragment();
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container, medicosFragment);
+            fragmentTransaction.commit();
+        });
+
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         citaList = new ArrayList<>();
 
-        AdaptadorCitas adaptadorCitas = new AdaptadorCitas(context, citaList, citas ->{
-           Intent i = new Intent(getActivity(), EditarCitasActivity.class);
-           //i.putExtra("nombreCita", citas.getNombreMedico());
-           startActivity(i);
+        PaginaPrincipal pagina = (PaginaPrincipal) getActivity();
+        FloatingActionButton fab = pagina.floatingActionButton;
+        fab.setVisibility(View.GONE);
+
+        return view;
+    }
+    
+    @Override
+    public void onResume(){
+        super.onResume();
+        citaList.clear();
+        consultarCitasFuturas(context);
+
+        AdaptadorCitas adaptadorCitas = new AdaptadorCitas(context, citaList, cita ->{
+            Intent i = new Intent(getActivity(), EditarCitasActivity.class);
+            i.putExtra("nombreCita", cita.getNombreMedico());
+            i.putExtra("horaCita", cita.getHora());
+            i.putExtra("fechaCita", cita.getDia());
+            i.putExtra("idCita", cita.getId());
+            startActivity(i);
         });
 
         recyclerView.setAdapter(adaptadorCitas);
+    }
 
-        consultarCitasFuturas(context);
-
-        return view;
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
     }
 
     private void inicializar(){
@@ -126,15 +157,8 @@ public class CitasFragment extends Fragment{
         cursor.close();
         return correo;
     }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        this.context = context;
-    }
-
-
-   private void ordenarCitas(){
+    
+    private void ordenarCitas(){
         Collections.sort(citaList, Comparator.comparing(Cita::getDia));
     }
 

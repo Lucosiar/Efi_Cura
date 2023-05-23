@@ -16,8 +16,8 @@
         android:title="Medicación">
     </item>
     <item
-        android:id="@+id/Recargas"
-        android:title="Recargas"
+        android:id="@+id/SintomasA"
+        android:title="Síntomas"
         />
 
     <item

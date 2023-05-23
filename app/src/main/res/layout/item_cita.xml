@@ -5,13 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<!--
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="98dp"
+        android:layout_width="411dp"
+        android:layout_height="731dp"
         android:background="@color/azulOscurito"
         android:orientation="vertical"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
@@ -40,5 +43,42 @@
             android:textSize="14sp" />
 
     </LinearLayout>
+-->
 
+
+    <LinearLayout
+        android:layout_width="367dp"
+        android:layout_height="85dp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="646dp"
+        android:background="@color/azulOscurito"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/medicoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="10sp"
+            android:text="Nombre Médico"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/diaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:text="Día"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

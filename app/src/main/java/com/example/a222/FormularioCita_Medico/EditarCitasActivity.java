@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -20,12 +21,14 @@ import com.example.a222.R;
 public class EditarCitasActivity extends AppCompatActivity {
 
     TextView tvNombreMedico, tvHospital, tvEspecialidad, tvHoraDia;
-    EditText etNotas;
-    Button bCancelarVolver, bGuardar;
+    Button bCancelarVolver;
     ImageButton bBorrar;
     String citaSeleccionada;
     Bundle bundle;
     Intent ii;
+
+    String nombreMedico, especialidad, hora_dia;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +41,21 @@ public class EditarCitasActivity extends AppCompatActivity {
         bundle = ii.getExtras();
 
         if(bundle != null){
-            citaSeleccionada = (String) bundle.get("nombre");
-            tvNombreMedico.setText(citaSeleccionada);
+            citaSeleccionada = (String) bundle.get("nombreCita");
+            String horaCita = bundle.getString("horaCita");
+            String fechaCita = bundle.getString("fechaCita");
+            hora_dia = fechaCita + " - " + horaCita;
+
+            String [] partes = citaSeleccionada.split("-");
+            if(partes.length > 1){
+                nombreMedico = partes[0].trim();
+                especialidad = partes[1].trim();
+            }
+            tvNombreMedico.setText(nombreMedico);
+            tvEspecialidad.setText(especialidad);
+            tvHoraDia.setText(hora_dia);
+
+            consultarHospital(nombreMedico, especialidad);
         }
 
         bBorrar.setOnClickListener(v -> {
@@ -52,6 +68,21 @@ public class EditarCitasActivity extends AppCompatActivity {
             dialogo1.setNegativeButton("Calcelar", (dialog, which) -> cancelarBorrado());
             dialogo1.show();
         });
+
+        bCancelarVolver.setOnClickListener(v -> finish());
+    }
+
+    private void consultarHospital(String nombreMedico, String especialidad){
+        AdminSQLiteOpenHelper db = new AdminSQLiteOpenHelper(this);
+        SQLiteDatabase sql = db.getWritableDatabase();
+
+        Cursor cursor = sql.rawQuery("Select * from medicos where nombre = ? and especialidad = ?", new String[]{nombreMedico, especialidad});
+        if(cursor.moveToFirst()){
+            String hospital = cursor.getString(3);
+            tvHospital.setText(hospital);
+        }
+        cursor.close();
+        sql.close();
     }
 
     private void cancelarBorrado(){
@@ -77,9 +108,7 @@ public class EditarCitasActivity extends AppCompatActivity {
         tvHospital = findViewById(R.id.tvHospital);
         tvEspecialidad = findViewById(R.id.tvEspecialidad);
         tvHoraDia = findViewById(R.id.tvHoraDia);
-        etNotas = findViewById(R.id.etNotas);
         bCancelarVolver = findViewById(R.id.bCancelarVolver);
-        bGuardar = findViewById(R.id.bGuardar);
         bBorrar = findViewById(R.id.bBorrar);
     }
 }

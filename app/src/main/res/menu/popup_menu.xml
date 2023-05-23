@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/opcionMedicacion"
+        android:icon="@drawable/ic_launcher_medicacion"
+        android:title="Añadir Medicación" />
+    <item
+        android:id="@+id/opcionSintomas"
+        android:icon="@drawable/ic_baseline_emoji_emotions"
+        android:title="Añadir Síntoma" />
+    <item
+        android:id="@+id/opcionCitas"
+        android:icon="@drawable/ic_baseline_location_city_24"
+        android:title="Añadir Cita" />
+</menu>

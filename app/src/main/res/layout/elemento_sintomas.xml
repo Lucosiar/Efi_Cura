@@ -12,7 +12,7 @@
 
 
     <LinearLayout
-        android:layout_width="367dp"
+        android:layout_width="365dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10sp"
         android:layout_marginTop="10sp"
@@ -23,18 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/idSintoma"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
-                android:layout_marginEnd="10sp"
-                android:layout_marginBottom="10sp"
-                android:text="1"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/slas"
@@ -52,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10sp"
                 android:layout_marginTop="5sp"
-                android:text="Especialidad"
+                android:text="Dolor"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 tools:ignore="HardcodedText" />
@@ -61,10 +49,13 @@
 
         <TextView
             android:id="@+id/horaSintoma"
-            android:layout_width="350dp"
-            android:layout_height="38dp"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="27sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp"
             android:layout_weight="1"
-            android:text="Hospital"
+            android:text="Hora"
             android:textColor="@color/white"
             android:textSize="20sp"
             tools:ignore="HardcodedText,InefficientWeight,TextSizeCheck" />

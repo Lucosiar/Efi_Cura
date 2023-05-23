@@ -26,7 +26,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         //Medicaciones
         db.execSQL("create table medicacion(nombre text primary key, cantidadDiaria int, fechaIni text, " +
                "fechaFin text, duracion int, toma1 text, toma2 text, toma3 text, toma4 text, cantidadCaja int, formato TEXT, "
-                + "notaComida TEXT, diasTomas text, usuario TEXT)");
+                + "notaComida TEXT, diasTomas text, tomado boolean, usuario TEXT)");
 
         //Medicos
         db.execSQL("create table medicos(id int Primary key, nombre TEXT, especialidad text, hospital text, numero String, correo text, usuario TEXT)");
@@ -35,6 +35,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("create table citas(id int Primary key, nombreMedico TEXT, dia text, hora text, usuario TEXT)");
         //Servicio de la cita por ejemplo: medicina interna...
 
+        //Sintomas
         db.execSQL("create table sintomas(id int primary key, tipo TEXT, hora TEXT, fecha text, alta int, baja int, dolor int, usuario TEXT)");
     }
 
@@ -92,7 +93,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public void insertarMedicacion(String nombre, String cantidadDiaria, String fechaIni, String fechaFin, String duracion, String frecuencia,
                                    String toma1, String toma2, String toma3, String toma4, String cantidadCaja, String formato, String notaComida,
-                                   String diasTomas, String usuario){
+                                   String diasTomas, boolean tomado, String usuario){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -111,6 +112,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put("formato", formato);
         values.put("notaComida", notaComida);
         values.put("diasTomas", diasTomas);
+        values.put("tomado", tomado);
         values.put("usuario", usuario);
         db.insert("medicacion", null, values);
         db.close();
@@ -127,6 +129,28 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
             db.execSQL("insert into medicos values (?, ?, ?, ?, ?, ?, ?)", new String[]{is, nombre, especialidad, hospital, numero, correo, nombreU});
             db.close();
         }
+    }
+
+    public void insertarSintomas(String tipo, String hora, String fecha, String alta, String baja, String dolor, String usuario){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int nuevoID = obtenerUltimoSintoma();
+        String is = String.valueOf(nuevoID);
+
+        if(db != null){
+            db.execSQL("insert into sintomas values(?, ?, ?, ?, ?, ?, ?, ?)", new String[]{is, tipo, hora, fecha, alta, baja, dolor, usuario});
+            db.close();
+        }
+    }
+
+    public int obtenerUltimoSintoma(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select MAX(id) from sintomas", null);
+        int id = 1;
+
+        if(cursor.moveToFirst() && !cursor.isNull(0)){
+            id = cursor.getInt(0) + 1;
+        }
+        return id;
     }
 
     public int obtenerUltimaCita(){

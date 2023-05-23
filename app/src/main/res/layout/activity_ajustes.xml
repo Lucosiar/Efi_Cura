@@ -40,12 +40,21 @@
                 android:textSize="25sp" />
 
             <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="5sp"
+                android:text="Correo:"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
                 android:id="@+id/tvCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10sp"
                 android:layout_marginEnd="10sp"
-                android:text="Correo"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -61,7 +70,7 @@
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/switch2"
+                android:id="@+id/sMedicacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10sp"
@@ -73,7 +82,7 @@
                 android:textSize="20sp" />
 
             <Switch
-                android:id="@+id/switch3"
+                android:id="@+id/sRecargas"
                 android:layout_width="312dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10sp"
@@ -83,33 +92,27 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="match_parent"
+            <Switch
+                android:id="@+id/sCitas"
+                android:layout_width="313dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10sp"
-                android:layout_marginTop="15sp"
-                android:layout_marginEnd="10sp"
-                android:text="Fuentes"
+                android:layout_marginTop="5sp"
+                android:minHeight="48dp"
+                android:text="Notificaciones de citas"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cambiar la fuente de la letra" />
+                android:textSize="20sp" />
 
             <Switch
-                android:id="@+id/swModoOscuro"
-                android:layout_width="match_parent"
+                android:id="@+id/sSintomas"
+                android:layout_width="313dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10sp"
-                android:layout_marginEnd="40sp"
-                android:text="Modo oscuro"
+                android:layout_marginTop="5sp"
+                android:minHeight="48dp"
+                android:text="Notificaciones síntomas"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/cerrarSesion"
@@ -120,6 +123,18 @@
                 android:backgroundTint="@color/white"
                 android:text="Cerrar sesion"
                 android:textColor="@android:color/holo_red_dark"
+                app:cornerRadius="130sp" />
+
+            <Button
+                android:id="@+id/bVolverAjustes"
+                android:layout_width="286dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15sp"
+                android:backgroundTint="@color/white"
+                android:text="Guardar"
+                android:textColor="@color/fondoAzul"
+                android:textSize="20sp"
                 app:cornerRadius="130sp" />
         </LinearLayout>
     </ScrollView>

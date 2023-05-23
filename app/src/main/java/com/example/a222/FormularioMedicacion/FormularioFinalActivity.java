@@ -76,7 +76,7 @@ public class FormularioFinalActivity extends AppCompatActivity {
         fechaIni = preferences.getString("fechaIni", "");
         duracion = preferences.getInt("duracion", 0);
         fechaFin = preferences.getString("fechaFin", "SINFCH");
-        diasTomas = preferences.getString("diasToma", "*");
+        diasTomas = preferences.getString("diasToma", "");
 
         //Parseamos la cantidad para poder poner bien el formato
         int canti = Integer.parseInt(cantidadDiaria);
@@ -94,8 +94,6 @@ public class FormularioFinalActivity extends AppCompatActivity {
         cvHora.setText(hora1);
         cvFrecuencia.setText(frecu);
         cvCuando.setText(notaComida);
-
-
     }
 
     public void guardarSQL(){
@@ -105,9 +103,10 @@ public class FormularioFinalActivity extends AppCompatActivity {
         usuario = consultarCorreo(usuario);
 
         duracionS = String.valueOf(duracion);
+        Boolean tomado = false;
 
         //Insertamos todos los valores en la base de datos
-        db.insertarMedicacion(nombre, cantidadDiaria, fechaIni, fechaFin, duracionS, frecu, hora1, hora2, hora3, hora4, cantidadTotal, forma, notaComida, diasTomas, usuario);
+        db.insertarMedicacion(nombre, cantidadDiaria, fechaIni, fechaFin, duracionS, frecu, hora1, hora2, hora3, hora4, cantidadTotal, forma, notaComida, diasTomas, tomado, usuario);
         Toast.makeText(ffa, "La medicación ha sido guarda", Toast.LENGTH_SHORT).show();
     }
 

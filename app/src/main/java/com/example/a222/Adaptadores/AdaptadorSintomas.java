@@ -24,7 +24,7 @@ public class AdaptadorSintomas extends RecyclerView.Adapter<AdaptadorSintomas.Si
         void onItemClick(Sintomas sintomas);
     }
 
-    public AdaptadorSintomas(Context context, List<Sintomas> sintomasList) {
+    public AdaptadorSintomas(Context context, List<Sintomas> sintomasList, OnItemClickListener listener) {
         this.sintomasList = sintomasList;
         this.context = context;
         this.listener = listener;
@@ -43,8 +43,8 @@ public class AdaptadorSintomas extends RecyclerView.Adapter<AdaptadorSintomas.Si
     public void onBindViewHolder(SintomasViewHolder holder, int position) {
         Sintomas sints = sintomasList.get(position);
 
-        int id = sints.getId();
-        holder.idSintoma.setText(id);
+        /*String id = String.valueOf(sints.getId());
+        holder.idSintoma.setText(id);*/
         holder.Sintoma.setText(sints.getTipo());
         holder.horaSintoma.setText(sints.getHora());
 
@@ -60,10 +60,10 @@ public class AdaptadorSintomas extends RecyclerView.Adapter<AdaptadorSintomas.Si
 
     public static class SintomasViewHolder extends RecyclerView.ViewHolder{
 
-        TextView idSintoma, Sintoma, horaSintoma;
+        TextView Sintoma, horaSintoma;
         public SintomasViewHolder(View itemView) {
             super(itemView);
-            idSintoma = itemView.findViewById(R.id.idSintoma);
+            //idSintoma = itemView.findViewById(R.id.idSintoma);
             Sintoma = itemView.findViewById(R.id.Sintoma);
             horaSintoma = itemView.findViewById(R.id.horaSintoma);
         }

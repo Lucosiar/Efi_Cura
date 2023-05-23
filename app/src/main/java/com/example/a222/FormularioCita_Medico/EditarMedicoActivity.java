@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +22,7 @@ import com.example.a222.R;
 public class EditarMedicoActivity extends AppCompatActivity {
     TextView tvMostrarNombreMedico, tvMostrarEspecialidad, tvMostrarHospital,
             tvMostrarTelefono, tvMostrarCorreo;
-    ImageButton bAtrasMedico, bBorrarMedico, bEditarMedico;
+    ImageButton bAtrasMedico, bBorrarMedico;
 
     String medicoSeleccionado = "";
     String especialidadMedico = "";
@@ -29,6 +31,7 @@ public class EditarMedicoActivity extends AppCompatActivity {
 
     Context context;
     Intent intent;
+    Button bVolverAtras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +53,7 @@ public class EditarMedicoActivity extends AppCompatActivity {
             dialogo.show();
         });
 
-        bEditarMedico.setOnClickListener(v ->{
-            Intent editar = new Intent(this, MedicoActivity.class);
-            startActivity(editar);
-        });
-
+        bVolverAtras.setOnClickListener(v -> finish());
     }
 
     private void cancelarBorrado(){
@@ -152,7 +151,6 @@ public class EditarMedicoActivity extends AppCompatActivity {
         tvMostrarCorreo = findViewById(R.id.tvMostrarCorreo);
         bBorrarMedico = findViewById(R.id.bBorrarMedico);
         bAtrasMedico = findViewById(R.id.bAtrasMedico);
-        bEditarMedico = findViewById(R.id.bEditarMedico);
 
         context = this;
 
@@ -161,6 +159,8 @@ public class EditarMedicoActivity extends AppCompatActivity {
         especialidadMedico = intent.getStringExtra("especialidad");
         tvMostrarNombreMedico.setText(medicoSeleccionado);
         tvMostrarEspecialidad.setText(especialidadMedico);
+
+        bVolverAtras = findViewById(R.id.bVolverAtras);
 
         obtenerDatos(medicoSeleccionado, especialidadMedico);
     }

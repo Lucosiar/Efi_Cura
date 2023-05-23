@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,9 @@ import com.example.a222.ClasesGetSet.Medicacion;
 import com.example.a222.FormularioCita_Medico.MedicacionActivity;
 import com.example.a222.FormularioMedicacion.Formulario1Activity;
 import com.example.a222.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,14 +68,9 @@ public class MedicacionFragment extends Fragment {
 
         medicacionList = new ArrayList<>();
 
-        consultarMedicacion();
-
-        AdaptadorMedicacion adaptadorMedicacion = new AdaptadorMedicacion(context, medicacionList, (Medicacion medicacion) -> {
-            Intent intent = new Intent(getActivity(), MedicacionActivity.class);
-            intent.putExtra("nombre",  medicacion.getNombre());
-            startActivity(intent);
-        });
-        recyclerView.setAdapter(adaptadorMedicacion);
+        PaginaPrincipal pagina = (PaginaPrincipal) getActivity();
+        FloatingActionButton fab = pagina.floatingActionButton;
+        fab.setVisibility(View.GONE);
 
         return view;
     }
@@ -123,4 +121,16 @@ public class MedicacionFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        medicacionList.clear();
+        consultarMedicacion();
+        AdaptadorMedicacion adaptadorMedicacion = new AdaptadorMedicacion(context, medicacionList, medica -> {
+            Intent intent = new Intent(getActivity(), MedicacionActivity.class);
+            intent.putExtra("nombre",  medica.getNombre());
+            startActivity(intent);
+        });
+        recyclerView.setAdapter(adaptadorMedicacion);
+    }
 }

@@ -14,9 +14,11 @@
 
         <ImageButton
             android:id="@+id/bBorrar"
-            android:layout_width="match_parent"
+            android:layout_width="123dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:backgroundTint="@color/fondoAzul"
+            android:contentDescription="botonBorrarCita"
             app:srcCompat="@drawable/ic_baseline_delete" />
 
         <TextView
@@ -92,7 +94,7 @@
             android:layout_marginStart="10sp"
             android:layout_marginTop="15sp"
             android:layout_marginEnd="10sp"
-            android:text="Hora y Día"
+            android:text="Día y Hora"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -107,51 +109,15 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/textView46"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10sp"
-            android:layout_marginTop="15sp"
-            android:layout_marginEnd="10sp"
-            android:text="Notas:"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/etNotas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10sp"
-            android:layout_marginTop="7sp"
-            android:layout_marginEnd="10sp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:text="Name"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/bGuardar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="25sp"
-            android:layout_marginEnd="20sp"
-            android:backgroundTint="@color/white"
-            android:text="Guardar"
-            app:cornerRadius="130dp" />
-
         <Button
             android:id="@+id/bCancelarVolver"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="35sp"
-            android:layout_marginTop="10sp"
+            android:layout_marginTop="270sp"
             android:layout_marginEnd="35sp"
             android:backgroundTint="@color/white"
-            android:text="Cancelar"
+            android:text="Volver"
             app:cornerRadius="130dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
