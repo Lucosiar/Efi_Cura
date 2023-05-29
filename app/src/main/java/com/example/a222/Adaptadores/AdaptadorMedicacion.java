@@ -14,8 +14,8 @@ import java.util.List;
 
 public class AdaptadorMedicacion extends RecyclerView.Adapter<AdaptadorMedicacion.MedicacionViewHolder> {
     private final List<Medicacion> medicacionList;
-    private Context context;
-    private OnItemClickListener listener;
+    private final Context context;
+    private final OnItemClickListener listener;
 
     public interface OnItemClickListener{
         void onItemClick(Medicacion medicacion);

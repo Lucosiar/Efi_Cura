@@ -30,7 +30,7 @@ public class AjustesActivity extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     String llave = "sesion";
-    Switch sMedicacion, sRecargas, sCitas, sSintomas;
+    Switch sMedicacion, sRecargas, sCitas, sSintomas, sAlertasSintomas;
 
     TextView tvUsuario, tvCorreo;
     String usu;
@@ -63,11 +63,13 @@ public class AjustesActivity extends AppCompatActivity {
             boolean sCitasState = sCitas.isChecked();
             boolean sRecargasState = sRecargas.isChecked();
             boolean sMedicacionState = sMedicacion.isChecked();
+            boolean sAlertaSintomasState = sSintomas.isChecked();
 
             editor.putBoolean("sSintomas", sSintomasState);
             editor.putBoolean("sCitas", sCitasState);
             editor.putBoolean("sRecargas", sRecargasState);
             editor.putBoolean("sMedicacion", sMedicacionState);
+            editor.putBoolean("sAlertaSintomas", sAlertaSintomasState);
             editor.apply();
 
             finish();
@@ -119,18 +121,22 @@ public class AjustesActivity extends AppCompatActivity {
         sCitas = findViewById(R.id.sCitas);
         sRecargas = findViewById(R.id.sRecargas);
         sMedicacion = findViewById(R.id.sMedicacion);
+        sAlertasSintomas = findViewById(R.id.sAlertasSintomas);
 
         preferences = getSharedPreferences("usuarios", Context.MODE_PRIVATE);
         boolean sSintomaState = preferences.getBoolean("sSintomas", false);
         boolean sCitasState = preferences.getBoolean("sCitas", false);
         boolean sRecargasState = preferences.getBoolean("sRecargas", false);
         boolean sMedicacionState = preferences.getBoolean("sMedicacion", false);
+        boolean sAlertasSintomasState = preferences.getBoolean("sAlertaSintomas", false);
 
 
         sSintomas.setChecked(sSintomaState);
         sCitas.setChecked(sCitasState);
         sRecargas.setChecked(sRecargasState);
         sMedicacion.setChecked(sMedicacionState);
+        sAlertasSintomas.setChecked(sAlertasSintomasState);
+
 
         db = new AdminSQLiteOpenHelper(this);
     }

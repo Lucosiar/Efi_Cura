@@ -23,8 +23,7 @@ public class Formulario5Activity extends AppCompatActivity {
     SharedPreferences s;
     SharedPreferences.Editor editor;
 
-    private final String [] frecuencia = {"Una vez a la semana", "Cada 2 días", "2 días a la semana", "3 días a la semana",
-        "Cada 28 horas"};
+    private final String [] frecuencia = {"Una vez a la semana", "Cada 2 días", "2 días a la semana"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,22 +80,13 @@ public class Formulario5Activity extends AppCompatActivity {
                     editor.commit();
                     cambiarPantalla();
                     break;
-
-                case "3 días a la semana":
-                    s = getSharedPreferences("datos", MODE_PRIVATE);
-                    editor = s.edit();
-                    editor.putString("dia", "3 días a la semana");
-                    editor.commit();
-                    cambiarPantalla();
-                    break;
-
-                case "Cada 28 horas":
+                /*case "Cada 28 horas":
                     s = getSharedPreferences("datos", MODE_PRIVATE);
                     editor = s.edit();
                     editor.putString("dia", "Cada 28 horas");
                     editor.commit();
                     cambiarPantalla();
-                    break;
+                    break;*/
             }
         });
     }

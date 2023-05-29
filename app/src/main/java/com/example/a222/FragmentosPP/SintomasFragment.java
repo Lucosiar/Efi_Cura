@@ -3,37 +3,53 @@ package com.example.a222.FragmentosPP;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
-import com.example.a222.Adaptadores.AdaptadorMedico;
 import com.example.a222.Adaptadores.AdaptadorSintomas;
 import com.example.a222.AdminSQLiteOpenHelper;
 import com.example.a222.ClasesGetSet.Sintomas;
-import com.example.a222.FormularioCita_Medico.EditarMedicoActivity;
 import com.example.a222.FormularioCita_Medico.EditarSintomasActivity;
 import com.example.a222.FormularioCita_Medico.SintomasActivity;
+import android.Manifest;
 import com.example.a222.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.property.TextAlignment;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class SintomasFragment extends Fragment {
 
@@ -43,8 +59,10 @@ public class SintomasFragment extends Fragment {
     SharedPreferences s;
     FragmentActivity sintomas;
     RecyclerView recyclerSintomas;
-    Button bAnadirSintomas;
+    Button bAnadirSintomas, bDescargarSintomas;
     List<Sintomas> sintomasList;
+
+    private static final int REQUEST_CODE_PERMISSION = 123;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,6 +90,11 @@ public class SintomasFragment extends Fragment {
         FloatingActionButton fab = pagina.floatingActionButton;
         fab.setVisibility(View.GONE);
 
+        bDescargarSintomas = view.findViewById(R.id.bDescargarSintomas);
+        bDescargarSintomas.setOnClickListener(v -> {
+            generarPDFSintomas();
+        });
+
         return view;
     }
 
@@ -93,6 +116,157 @@ public class SintomasFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         this.context = context;
+    }
+
+    private void generarPDFSintomas() {
+        List<Sintomas> listaSintomas = sacarSintomasInversos();
+        ordenarSintomas(listaSintomas);
+
+        // Verificar si el permiso WRITE_EXTERNAL_STORAGE ya ha sido otorgado
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_PERMISSION);
+        } else {
+            // El permiso ya ha sido otorgado, continuar con el proceso de guardar el archivo
+            guardarArchivoPDF();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_CODE_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // El permiso ha sido otorgado, continuar con el proceso de guardar el archivo
+                guardarArchivoPDF();
+            } else {
+                // El permiso ha sido denegado, mostrar un mensaje de error o realizar alguna acción alternativa
+                Toast.makeText(requireContext(), "Permiso denegado para guardar el archivo", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void guardarArchivoPDF() {
+        List<Sintomas> listaSintomas = sacarSintomasInversos();
+        ordenarSintomas(listaSintomas);
+
+        //File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "sintomas.pdf");
+        File file = new File(requireContext().getFilesDir(), "sintomas.pdf");
+
+        try {
+            PdfWriter writer = new PdfWriter(file);
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+
+            // Escribir los registros en el PDF
+            for (Sintomas sintoma : listaSintomas) {
+                String texto = sintoma.getTipo() + " - " + sintoma.getFecha();
+
+                // Crear un párrafo con el texto y establecer la alineación
+                Paragraph paragraph = new Paragraph(texto);
+                paragraph.setTextAlignment(TextAlignment.LEFT);
+
+                // Agregar el párrafo al documento
+                document.add(paragraph);
+            }
+
+            // Cerrar el documento iText
+            document.close();
+
+            // Mostrar un mensaje de éxito
+            Toast.makeText(requireContext(), "PDF generado y guardado correctamente", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Mostrar un mensaje de error en caso de fallo
+            Toast.makeText(requireContext(), "Error al generar el PDF", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void generarPDFSintomassda() {
+        List<Sintomas> listaSintomas = sacarSintomasInversos();
+        ordenarSintomas(listaSintomas);
+
+        //File file = new File(requireContext().getFilesDir(), "sintomas.pdf");
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "sintomas.pdf");
+
+        try {
+            PdfWriter writer = new PdfWriter(file);
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+
+            // Escribir los registros en el PDF
+            for (Sintomas sintoma : listaSintomas) {
+                String texto = sintoma.getTipo() + " - " + sintoma.getFecha();
+
+                // Crear un párrafo con el texto y establecer la alineación
+                Paragraph paragraph = new Paragraph(texto);
+                paragraph.setTextAlignment(TextAlignment.LEFT);
+
+                // Agregar el párrafo al documento
+                document.add(paragraph);
+            }
+
+            // Cerrar el documento iText
+            document.close();
+
+            // Mostrar un mensaje de éxito
+            Toast.makeText(sintomas, "PDF generado y guardado correctamente", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Mostrar un mensaje de error en caso de fallo
+            Toast.makeText(sintomas, "Error al generar el PDF", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private List<Sintomas> sacarSintomasInversos(){
+        SQLiteDatabase sql = db.getReadableDatabase();
+
+        s = sintomas.getSharedPreferences("usuarios", Context.MODE_PRIVATE);
+        String nombre = s.getString("nombre", "");
+        String usu = consultarCorreo(nombre);
+
+        Cursor cursor = sql.rawQuery("SELECT * FROM sintomas WHERE usuario = ? AND fecha NOT LIKE '*' AND fecha NOT BETWEEN '1' AND '31' AND fecha NOT IN ('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo')",
+                new String[]{usu});
+
+
+        while(cursor.moveToNext()){
+            Sintomas sintomas = new Sintomas();
+            sintomas.setId(cursor.getInt(0));
+            sintomas.setTipo(cursor.getString(1));
+            sintomas.setHora(cursor.getString(2));
+            sintomas.setFecha(cursor.getString(3));
+            sintomas.setAlta(cursor.getInt(4));
+            sintomas.setBaja(cursor.getInt(5));
+            sintomas.setDolor(cursor.getInt(6));
+            sintomas.setUsuario(cursor.getString(7));
+
+            sintomasList.add(sintomas);
+        }
+        cursor.close();
+        db.close();
+
+        Log.d(":::ERROR:", "LIsta: " + sintomasList);
+        return sintomasList;
+    }
+
+    private List<Sintomas> ordenarSintomas(List<Sintomas> listaDatos){
+        Collections.sort(listaDatos, (o1, o2) -> {
+            int tipoComparacion = o1.getTipo().compareTo(o2.getTipo());
+            if(tipoComparacion != 0){
+                return tipoComparacion;
+            }
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            try {
+                Date fecha1 = dateFormat.parse(o1.getFecha());
+                Date fecha2 = dateFormat.parse(o2.getFecha());
+                assert fecha1 != null;
+                return fecha1.compareTo(fecha2);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            return 0;
+        });
+        return listaDatos;
     }
 
     private void consultarSintomas(){
@@ -132,13 +306,11 @@ public class SintomasFragment extends Fragment {
             if(fecha.equals("*")){
                 programarNotificacion(hora);
             }
-
         }
         Log.d(":::ERROR:", ("Número de síntomas: " + sintomasList.size()));
         if(adaptadorSintomas != null){
             adaptadorSintomas.notifyDataSetChanged();
         }
-
     }
 
     private void programarNotificacion(String hora) {

@@ -161,29 +161,4 @@ public class CitasFragment extends Fragment{
     private void ordenarCitas(){
         Collections.sort(citaList, Comparator.comparing(Cita::getDia));
     }
-
-/*    private void consultarCitas(){
-        citaList.clear();
-        SQLiteDatabase base = db.getReadableDatabase();
-
-        preferences = citas.getSharedPreferences("usuarios", Context.MODE_PRIVATE);
-        nombre = preferences.getString("nombre", "");
-        nombreUsuario = consultarCorreo(nombre);
-
-        Cita cita;
-
-        Cursor cursor = base.rawQuery("Select * from citas where usuario = ?",new String[]{nombreUsuario});
-
-        while(cursor.moveToNext()) {
-            cita = new Cita();
-
-            cita.setNombreMedico(cursor.getString(1));
-            cita.setDia(cursor.getString(2));
-            cita.setHora(cursor.getString(3));
-
-            citaList.add(cita);
-        }
-        ordenarCitas();
-        checkBoxMostrarTodos.setChecked(false);
-    }*/
 }

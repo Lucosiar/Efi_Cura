@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/horaCita"
-    android:layout_width="wrap_content"
+    android:layout_width="375sp"
     android:layout_height="wrap_content"
     android:layout_marginTop="5sp"
     android:layout_marginBottom="5sp"
@@ -12,53 +12,75 @@
 
 
     <LinearLayout
-        android:layout_width="365dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10sp"
-        android:layout_marginTop="10sp"
-        android:orientation="vertical"
-        tools:ignore="RtlHardcoded,TextSizeCheck">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="279dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginLeft="10sp"
+            android:layout_marginTop="10sp"
+            android:orientation="vertical"
+            tools:ignore="RtlHardcoded,TextSizeCheck">
 
-            <TextView
-                android:id="@+id/slas"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
-                android:text=" - "
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                tools:ignore="HardcodedText" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/Sintoma"
+                <TextView
+                    android:id="@+id/slas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5sp"
+                    android:text=" - "
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/Sintoma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginTop="5sp"
+                    android:text="Dolor"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10sp"
-                android:layout_marginTop="5sp"
-                android:text="Dolor"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                tools:ignore="HardcodedText" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/horaSintoma"
+                    android:layout_width="115dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="27sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_weight="1"
+                    android:text="Hora"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    tools:ignore="HardcodedText,InefficientWeight,TextSizeCheck" />
+            </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/horaSintoma"
-            android:layout_width="300dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="27sp"
-            android:layout_marginTop="5sp"
-            android:layout_marginBottom="5sp"
+        <ImageView
+            android:id="@+id/iconTick"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="7sp"
+            android:layout_marginEnd="25sp"
             android:layout_weight="1"
-            android:text="Hora"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            tools:ignore="HardcodedText,InefficientWeight,TextSizeCheck" />
+            app:srcCompat="@drawable/ic_baseline_check" />
 
     </LinearLayout>
 

@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15sp"
-            android:layout_marginTop="20sp"
+            android:layout_marginTop="40sp"
             android:layout_marginEnd="15sp"
             android:text="Dolor"
             android:textColor="@color/white"
@@ -28,27 +28,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15sp"
-            android:layout_marginTop="10sp"
+            android:layout_marginTop="20sp"
             android:layout_marginEnd="15sp"
             android:text="Hoy"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tvNumero"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15sp"
-            android:layout_marginTop="15sp"
-            android:layout_marginEnd="15sp"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="66dp"
-            android:layout_marginTop="10sp"
+            android:layout_marginTop="20sp"
             android:orientation="horizontal">
 
             <EditText
@@ -74,21 +63,10 @@
                 android:text="TextView" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvBaja"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15sp"
-            android:layout_marginTop="15sp"
-            android:layout_marginEnd="15sp"
-            android:text="TextView"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="67dp"
-            android:layout_marginTop="10sp"
+            android:layout_marginTop="20sp"
             android:orientation="horizontal">
 
             <EditText
@@ -119,7 +97,7 @@
             android:layout_width="333dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="290sp"
+            android:layout_marginTop="300sp"
             android:backgroundTint="@color/white"
             android:text="Guardar"
             app:cornerRadius="130dp" />

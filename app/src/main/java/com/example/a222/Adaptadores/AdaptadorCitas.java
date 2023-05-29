@@ -19,8 +19,8 @@ import java.util.List;
 
 public class AdaptadorCitas extends RecyclerView.Adapter<AdaptadorCitas.CitasViewHolder>{
     private final List<Cita> citaList;
-    private Context context;
-    private OnItemClickListener listener;
+    private final Context context;
+    private final OnItemClickListener listener;
 
     public interface OnItemClickListener{
         void onItemClick(Cita cita);

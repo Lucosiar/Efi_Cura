@@ -13,12 +13,23 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView39"
+            android:id="@+id/tvFrecuenciaElegir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10sp"
+            android:layout_marginStart="15sp"
             android:layout_marginTop="20sp"
-            android:layout_marginEnd="10sp"
+            android:layout_marginEnd="15sp"
+            android:text="Frecu"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvEnunciado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="15sp"
             android:text="Elija el día que quiera tomar la medicación"
             android:textColor="@color/white"
             android:textSize="20sp" />
@@ -26,25 +37,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="69dp"
+            android:layout_marginTop="10sp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView40"
+                android:id="@+id/tvDiaElegir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10sp"
+                android:layout_marginStart="15sp"
                 android:layout_marginTop="10sp"
                 android:layout_marginEnd="10sp"
                 android:layout_weight="1"
-                android:text="Día"
+                android:gravity="center"
+                android:hint="Día"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/bDiaElegir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10sp"
+                android:layout_marginEnd="15sp"
                 android:layout_marginRight="10sp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -56,45 +70,52 @@
             android:id="@+id/textView41"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10sp"
-            android:layout_marginEnd="10sp"
+            android:layout_marginStart="15sp"
+            android:layout_marginTop="15sp"
+            android:layout_marginEnd="15sp"
             android:text="Elija la hora "
             android:textColor="@color/white"
             android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="71dp"
+            android:layout_marginTop="10sp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView42"
+                android:id="@+id/tvHoraElegir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10sp"
+                android:layout_marginStart="15sp"
                 android:layout_marginTop="10sp"
                 android:layout_marginEnd="10sp"
                 android:layout_weight="1"
-                android:text="Hora"
+                android:gravity="center"
+                android:hint="Hora"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/bHoraElegir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10sp"
-                android:layout_marginEnd="10sp"
+                android:layout_marginEnd="15sp"
                 android:layout_marginRight="10sp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
                 android:text="Hora" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView43"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/bSeguir"
+            android:layout_width="296dp"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="300sp"
+            android:backgroundTint="@color/white"
+            android:text="Continuar"
+            android:textSize="20sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

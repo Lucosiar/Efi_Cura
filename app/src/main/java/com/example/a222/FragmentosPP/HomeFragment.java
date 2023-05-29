@@ -156,6 +156,11 @@ public class HomeFragment extends Fragment {
             AdaptadorMedicacion adaptadorMedicacion = new AdaptadorMedicacion(context, medicacionHoyList, medica -> {
                 Intent medicacion = new Intent(getActivity(), MedicacionTomarActivity.class);
                 medicacion.putExtra("nombreMedicacion", medica.getNombre());
+                medicacion.putExtra("hora1", medica.getToma1());
+                medicacion.putExtra("hora2", medica.getToma2());
+                medicacion.putExtra("hora3", medica.getToma3());
+                medicacion.putExtra("hora4", medica.getToma4());
+                medicacion.putExtra("recordatorio", medica.getNotaComida());
                 startActivity(medicacion);
             });
             recyclerMedicacion.setAdapter(adaptadorMedicacion);
@@ -186,7 +191,6 @@ public class HomeFragment extends Fragment {
                     case "Dolor abdominal":
                         Intent intent1 = new Intent(getActivity(), Agregar1_10SintomaActivity.class);
                         intent1.putExtra("tipo", sinto.getTipo());
-                        intent1.putExtra("id", sinto.getId());
                         startActivity(intent1);
                         break;
 
@@ -195,14 +199,12 @@ public class HomeFragment extends Fragment {
                     case "Temperatura corporal":
                         Intent intent2 = new Intent(getActivity(), AgregarNumeroSintomaActivity.class);
                         intent2.putExtra("tipo", sinto.getTipo());
-                        intent2.putExtra("id", sinto.getId());
                         startActivity(intent2);
                         break;
 
                     case "Presión arterial":
                         Intent intent3 = new Intent(getActivity(), AgregarVariosNumerosSintomaActivity.class);
                         intent3.putExtra("tipo", sinto.getTipo());
-                        intent3.putExtra("id", sinto.getId());
                         startActivity(intent3);
                         break;
 
@@ -239,7 +241,6 @@ public class HomeFragment extends Fragment {
         db = new AdminSQLiteOpenHelper(context);
         SQLiteDatabase sql = db.getReadableDatabase();
 
-        //Scamos el usuario
         s = home.getSharedPreferences("usuarios", Context.MODE_PRIVATE);
         String nombre = s.getString("nombre", "");
         String nombreUsuario = consultarCorreo(nombre);

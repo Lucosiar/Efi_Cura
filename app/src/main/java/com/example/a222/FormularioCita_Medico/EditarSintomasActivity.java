@@ -48,7 +48,7 @@ public class EditarSintomasActivity extends AppCompatActivity {
         });
 
         consultarSintomaPorId(idSintoma);
-        obtenerCantidadRegistro(idSintoma);
+        obtenerCantidadRegistro(tipoSintoma);
     }
 
     private void cancelarBorrado(){
@@ -122,10 +122,9 @@ public class EditarSintomasActivity extends AppCompatActivity {
         return false;
     }
 
-    private void obtenerCantidadRegistro(int id){
+    private void obtenerCantidadRegistro(String tipoSintoma){
         SQLiteDatabase sql = db.getReadableDatabase();
-        Cursor cursor = sql.rawQuery("select count(*) from sintomas where id = ?", new String[]{String.valueOf(id)});
-
+        Cursor cursor = sql.rawQuery("select count(*) from sintomas where tipo = ?", new String[]{tipoSintoma});
         if(cursor.moveToFirst()){
             String cantidadRegistros = cursor.getString(0);
             int menos1 = Integer.parseInt(cantidadRegistros);
